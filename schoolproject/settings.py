@@ -24,8 +24,10 @@ SECRET_KEY = 'django-insecure-1+l(m(gnp14ja)syk)=c9a5g4rmp(n!e7ri+nwbw3@7_$#ek0c
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+#A list of strings representing the host/domain names that this Django site can serve.
+#value in this list cab be qualified names(e.g. 'www.example.com') or hostnames(e.g. 'example.com')
+#To allow all host/domain names, use ['*']
+ALLOWED_HOSTS = [ ]
 
 
 # Application definition
@@ -37,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'feed',
+    'feed', 
 ]
 
 MIDDLEWARE = [
