@@ -17,6 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from school import views  # Replace 'course' with your actual app name
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
 ]
+
+
