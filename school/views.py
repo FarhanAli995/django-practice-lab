@@ -13,8 +13,8 @@ def django(request):
 def learn_python(request):
     return HttpResponse('Hello Python')
 
-# def best_course(request):
-#     return HttpResponse('welocome Django full single shot course!')
+def best_course(request):
+    return HttpResponse('welocome Django full single shot course!')
 
 # def learn_django(request):
 #     return HttpResponse('Hello Django')
