@@ -3,7 +3,7 @@ from django.http import HttpResponse
 # Create your views here.
 
 def fees_django(request):
-    return HttpResponse("300!")
+    return render(request, 'feesone.html')
 
 def fees_python(request):
-    return HttpResponse("500!")
+    return render(request, 'feestwo.html')
