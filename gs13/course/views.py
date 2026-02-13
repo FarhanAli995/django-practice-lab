@@ -34,4 +34,7 @@ def learn_dj(request):
 
 
 def learn_py(request):
-    return HttpResponse("Python Advanced Course Coming Soon 🚀")
+    context_1 = {
+        "name" :"Farhan Ali",
+    }
+    return render(request,"course/coursetwo.html",context_1)
