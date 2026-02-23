@@ -7,3 +7,6 @@ from django.http import HttpResponse
 
 def StudentFee(request):
     return HttpResponse('Here you will get Student Fee details')
+
+def firstYearStu(request):
+    return HttpResponse('<h1>Here you will get Student Fee details of 1st year</h1><p> The following are 1st Year Students.</p>')
