@@ -1,0 +1,21 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'core/css/home.css' %}" />
+
+    <title>{{title}} Home</title>
+  </head>
+  <body>
+    <h1>Home</h1>
+    <img src="{% static 'core/images/pic1.png' %}" alt="imgee" />
+    <img src="{% static 'core/images/pic2.png' %}" alt="same" />
+    <p>Image URL: {% static 'core/images/pic1.png' %}</p>
+
+    <input type="button" value="Click Me" onclick="core()" />
+
+    <script src="{% static 'core/js/core.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,143 @@
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> pip show django
+Name: Django
+Version: 6.0.1
+Summary: A high-level Python web framework that encourages rapid development and clean, pragmatic design.
+Home-page: https://www.djangoproject.com/
+Author: 
+Author-email: Django Software Foundation <foundation@djangoproject.com>
+License-Expression: BSD-3-Clause
+Location: C:\Users\dell\AppData\Local\Programs\Python\Python314\Lib\site-packages
+Requires: asgiref, sqlparse, tzdata
+Required-by: 
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> pwd
+
+Path
+----
+C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject
+
+
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> django-admin startproject mysite
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> ls -la
+Get-ChildItem : A parameter cannot be found that matches parameter name 'la'.
+At line:1 char:4
++ ls -la
++    ~~~
+    + CategoryInfo          : InvalidArgument: (:) [Get-ChildItem], ParameterBindingException  
+    + FullyQualifiedErrorId : NamedParameterNotFound,Microsoft.PowerShell.Commands.GetChildIt
+   emCommand
+
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject>  ls -DIR
+
+
+    Directory: C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         1/30/2026  11:36 AM                mysite
+dar--l         1/27/2026   3:08 AM                schoolproject
+
+
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> ls -DIR
+
+
+    Directory: C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+dar--l         1/27/2026   3:08 AM                schoolproject
+
+
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> djr
+djr : The term 'djr' is not recognized as the name of a cmdlet, function, script file, or 
+operable program. Check the spelling of the name, or if a path was included, verify that the   
+path is correct and try again.
+At line:1 char:1
++ djr
++ ~~~
+    + CategoryInfo          : ObjectNotFound: (djr:String) [], CommandNotFoundException        
+0
+manage.py : The term 'manage.py' is not recognized as the name of a cmdlet, function, script
+0
+manage.py : The term 'manage.py' is not recognized as the name of a cmdlet, function, script   
+file, or operable program. Check the spelling of the name, or if a path was included, verify   
+that the path is correct and try again.
+At line:1 char:1
++ manage.py runserver 0.0.0.0:8000
++ ~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (manage.py:String) [], CommandNotFoundException  
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+
+Suggestion [3,General]: The command manage.py was not found, but does exist in the current location. Windows PowerShell does not load commands from the current location by default. If you trust this command, instead type: ".\manage.py". See "get-help about_Command_Precedence" for more details.
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject>  DJR runsever
+DJR : The term 'DJR' is not recognized as the name of a cmdlet, function, script file, or 
+operable program. Check the spelling of the name, or if a path was included, verify that the   
+path is correct and try again.
+At line:1 char:2
++  DJR runsever
++  ~~~
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+Performing system checks...
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+Performing system checks...
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+Performing system checks...
+
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 30, 2026 - 11:46:27
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 30, 2026 - 11:46:27
+Django version 6.0.1, using settings 'schoolproject.settings'
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+Performing system checks...
+
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+Performing system checks...
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+PS C:\Users\dell\OneDrive\Desktop\new git\Django\schoolproject> python manage.py runserver 0.0.0.0:8000
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 30, 2026 - 11:46:27
+Django version 6.0.1, using settings 'schoolproject.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CTRL-BREAK.
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>One shot React course in only for Rs.400</h1>
+
+    {% if nm %}
+    <h3> hello {{ nm }}</h3>
+    {% else %}
+    <h3>hello guest</h3>
+    {% endif %}
+
+    <h2>example 8.1:</h2>
+
+    {% if nm and st %}
+    <h3>
+        {{ st }} seats are available for {{ nm }} courses
+    </h3>
+    {% elif not nm and st %}
+    <h3>{{st}} are not available of {{nm}}</h3>
+    {% else %}
+    <h3>no course available</h3>
+
+    {% endif%}
+
+    <hr>
+
+    <h1>{{p1}}</h1>
+    <h1>{{p2}}</h1>
+    <h1>{{p3}}</h1>
+    <hr>
+
+    <h2>{{p1|floatformat}}</h2>
+    <h2>{{p2|floatformat}}</h2>
+    <h2>{{p3|floatformat}}</h2>
+
+    <hr>
+
+    <h2>{{p1|floatformat:3}}</h2>
+    <h2>{{p2|floatformat:3}}</h2>
+    <h2>{{p3|floatformat:3}}</h2>
+
+    <hr>
+    <h2>{{p1|floatformat:0}}</h2>
+    <h2>{{p2|floatformat:0}}</h2>
+    <h2>{{p3|floatformat:0}}</h2>
+
+    <hr>
+    <h2>{{p1|floatformat:-3}}</h2>
+    <h2>{{p2|floatformat:-3}}</h2>
+    <h2>{{p3|floatformat:-3}}</h2>
+
+
+
+
+</body>
+
+</html> 

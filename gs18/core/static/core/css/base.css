@@ -1,0 +1,17 @@
+body {
+    background-color: darkslategrey;
+}
+
+h1 {
+    color: white;
+}
+
+h2 {
+    color: yellow;
+}
+
+
+img {
+    height: 300px;
+    width: 300px;
+}

@@ -1,0 +1,28 @@
+body {
+    background-color: dimgray;
+}
+
+h1 {
+    color: white;
+}
+
+h2 {
+    color: yellow;
+}
+
+img {
+    height: 300px;
+    width: 300px;
+}
+
+li {
+    color: yellow;
+}
+
+.nav {
+    color: yellow;
+}
+
+#nav {
+    color: blue;
+}

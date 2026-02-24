@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>One shot python course in only for Rs.400</h1>
+    {% if nm %}
+    <h3> hello {{nm}}</h3>
+    {% else %}
+    <h3>hello guest</h3>
+    {% endif %}
+
+    <hr>
+
+    <h2>For Loop:</h2>
+    <h3>{{names}}</h3>
+    <ul>
+        {% for nm in names %}
+        <li>{{nm}}<br></li>
+
+        {% endfor %}
+    </ul>
+
+    <h2> Reversed For Loop:</h2>
+    <h3>{{names}}</h3>
+    <ul>
+        {% for nm in names reversed %}
+        <li>{{nm}}<br></li>
+        {% endfor %}
+    </ul>
+
+    <h2>For Loop Filters:</h2>
+    <ul>
+        {% for nm in names %}
+        {{ forloop.counter0 }} {{name}} <br>
+        {% endfor %}
+    </ul>
+
+
+    <hr>
+    <h2>Couter</h2>
+    <ul>
+        {% for nm in names %}
+        {{ forloop.counter }} {{name}} <br>
+        {% endfor %}
+    </ul>
+
+    <h2>First True</h2>
+
+    <ul>
+        {% for nm in names %}
+        {{ forloop.first}} {{name}} <br>
+        {% endfor %}
+    </ul>
+
+    <h2>last True</h2>
+    <ul>
+        {% for nm in names %}
+        {{ forloop.last}} {{name}} <br>
+        {% endfor %}
+    </ul>
+
+    <h2>recounter</h2>
+    <ul>
+        {% for nm in names %}
+        {{ forloop.recounter0}} {{name}} <br>
+        {% endfor %}
+    </ul>
+
+
+
+</body>
+
+</html>
