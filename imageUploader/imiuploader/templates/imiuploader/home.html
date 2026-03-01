@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>home</h1>
+    {{stu}}
+
+    {% if stu %}
+        <h1>How to retreive data from database:</h1>
+        {% for stu1 in stu %}
+            <p><h3>Images List</h3>{{ stu1.photo }}</p>
+            <p><h3>Image Uploaded On</h3>{{ stu1.date }}</p>
+            <hr>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
