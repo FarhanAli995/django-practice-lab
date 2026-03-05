@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+
+{% block title %}Home - Khana Khazana{% endblock title %}
+
+{% block maincontent %}
+<!-- Hero Section -->
+<section class="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-white relative overflow-hidden shadow-2xl rounded-3xl mt-8">
+    <!-- Decorative background elements -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-orange-100 rounded-full opacity-30 -mr-32 -mt-32 blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-amber-100 rounded-full opacity-30 -ml-32 -mb-32 blur-3xl"></div>
+    
+    <!-- Content Container -->
+    <div class="relative z-10 container mx-auto px-8 py-32 flex flex-col items-center justify-center text-center h-full">
+        <!-- Subtitle -->
+        <div class="mb-6 animate-fade-in">
+            <h2 class="text-2xl font-semibold text-orange-600 tracking-widest uppercase letter-spacing-2">Enjoy Delicious</h2>
+        </div>
+        
+        <!-- Main Title -->
+        <div class="mb-8 animate-fade-in animation-delay-200">
+            <h1 class="text-7xl md:text-8xl font-black bg-gradient-to-r from-orange-600 via-red-500 to-amber-600 bg-clip-text text-transparent drop-shadow-lg">Tradintional Food</h1>
+        </div>
+        
+        <!-- Description -->
+        <div class="mb-12 max-w-2xl animate-fade-in animation-delay-400">
+            <h3 class="text-2xl md:text-3xl font-light text-gray-700 leading-relaxed italic">
+                Good Food warms the heart and mends the soul.
+            </h3>
+        </div>
+        
+        <!-- Call to Action Button -->
+        <div class="animate-fade-in animation-delay-600">
+            <a href="#" class="inline-block px-10 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-lg rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 transform active:scale-95 border-2 border-orange-500 hover:border-orange-700 ring-2 ring-orange-200 hover:ring-4 hover:ring-orange-400">
+                Order Now
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock maincontent %}              

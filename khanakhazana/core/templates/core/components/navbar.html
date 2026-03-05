@@ -1,0 +1,18 @@
+<header class="sticky top-0 z-50 bg-gradient-to-r from-orange-50 via-white to-orange-50 shadow-2xl border-b-2 border-orange-200 rounded-b-2xl">
+    <div class="container mx-auto flex justify-between items-center py-5 px-8">
+        <!-- Logo -->
+        <a href="{% url 'home' %}" class="text-5xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent hover:scale-110 transition-transform duration-300" style="font-family: dancing script, cursive;">Khana Khazana</a>
+        
+        <!-- Navigation -->
+        <nav class="flex-1 mx-12">
+            <ul class="flex space-x-8">
+                <li><a href="{% url 'home' %}" class="text-lg font-semibold text-gray-700 hover:text-orange-600 transition-colors duration-300 pb-2 border-b-2 border-transparent hover:border-orange-500">Home</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Search Bar -->
+        <div class="flex space-x-4 items-center">
+            <input type="text" placeholder="Search..." class="px-6 py-3 bg-white border-2 border-orange-200 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-300 shadow-md hover:shadow-lg hover:ring-4 hover:ring-orange-200 placeholder-gray-400 font-semibold text-sm">
+        </div>
+    </div>
+</header>
