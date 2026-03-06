@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,16 +11,12 @@
     <title>Khana Khazana</title>
     {% endblock title %}
 </head>
+
 <body class="bg-gradient-to-br from-orange-50 via-amber-50 to-white min-h-screen font-sans antialiased">
     
-    {% block navbar %}
+    {% include "core/components/navbar.html" %}
 
-      {% include "core/components/navbar.html" %}
-
-    {% endblock navbar %}
-    {% block hero %}{% endblock hero %}
     {% block maincontent %}{% endblock maincontent %}
-    {% block footer %}{% endblock footer %}
-    
+
 </body>
 </html>
