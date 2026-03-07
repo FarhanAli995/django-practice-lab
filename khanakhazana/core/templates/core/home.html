@@ -3,9 +3,7 @@
 
 {% block maincontent %}
         <!-- Spacer for balance (optional) -->
-        <div class="w-32"></div>
-    </div>
-</header>
+<div class="w-32"></div>
 
 <!-- Hero Section -->
 <section 
@@ -52,5 +50,63 @@ style="background-image: url('{% static 'core/images/biryani.png' %}');">
 
     </div>
 </section>
+
+<div class="w-full left-full ">
+    <div class="font-bold content-center text-center">
+        <br>
+        <h1>Best Dishes Of Our Restaurent:</h1>
+        <hr>
+        <br>
+    </div>
+</div>
+<div class="flex space-x-6 justify-evenly">
+
+    {% comment %} 1st dish {% endcomment %}
+    <div class="bg-slate-900">
+        <div>
+            <img src="{% static 'core/images/biryani.png' %}" class="w-72 h-72 object-cover rounded-3xl shadow-lg hover:scale-105 transition" alt="biryani">
+        </div>
+        <div>
+            <h2>
+                Karahi
+            </h2>
+            <hr>
+            <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus, perferendis. Exercitationem tenetur iure quidem impedit distinctio totam pariatur placeat earum.
+            </h3>
+        </div>
+    </div>
+
+
+
+        {% comment %} 2nd dish {% endcomment %}
+    <div>
+        <div>
+             <img src="{% static 'core/images/biryani.png' %}" class="w-72 h-72 object-cover rounded-3xl shadow-lg hover:scale-105 transition" alt="biryani">
+        </div>
+        <div>
+            <h2 class="text-5xl">
+                Haleem
+            </h2>
+            <hr>
+            <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus, perferendis. Exercitationem tenetur iure quidem impedit distinctio totam pariatur placeat earum.
+            </h3>
+        </div>
+    </div>
+
+
+
+        {% comment %} 3rd dish {% endcomment %}
+    <div>
+        <div>
+            <img src="{% static 'core/images/biryani.png' %}" class="w-72 h-72 object-cover rounded-3xl shadow-lg hover:scale-105 transition" alt="biryani">
+        </div>
+        <div>
+            <h2>Biryani</h2>
+            <hr>
+            <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus, perferendis. Exercitationem tenetur iure quidem impedit distinctio totam pariatur placeat earum.
+            </h3>
+        </div>
+    </div>
+</div>
 
 {% endblock maincontent %}
