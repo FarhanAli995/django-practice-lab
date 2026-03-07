@@ -7,3 +7,6 @@ def home(request):
 
 def about(request):
     return render(request, 'core/about.html')
+
+def footer(request):
+    return render(request, 'core/footer.html')
