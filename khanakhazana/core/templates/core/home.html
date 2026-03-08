@@ -32,153 +32,35 @@ style="background-image: url('{% static 'core/images/biryani.png' %}');">
 
 
 <!-- SAMPLE DISHES SECTION -->
+<!-- SAMPLE DISHES SECTION -->
 <section class="py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl font-bold text-center mb-14 text-yellow-400">
+            Our Popular Dishes
+        </h2>
 
-<div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-10">
+            {% for dish in context %}
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
+                <img src="https://images.unsplash.com/photo-1589308078059-be1415eab4c3" class="h-60 w-full object-cover">
+                
+                <div class="p-6">
+                    <h3 class="text-xl font-bold">{{ dish.name }}</h3>
+                    
+                    <p class="text-gray-600 mt-2">
+                        {{ dish.description }}
+                    </p>
 
-<h2 class="text-4xl font-bold text-center mb-14 text-yellow-400">
-Our Popular Dishes
-</h2>
-
-
-<div class="grid md:grid-cols-3 gap-10">
-
-<!-- Dish 1 -->
-<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-
-<img src="https://images.unsplash.com/photo-1589308078059-be1415eab4c3" class="h-60 w-full object-cover">
-
-<div class="p-6">
-<h3 class="text-xl font-bold">Chicken Biryani</h3>
-
-<p class="text-gray-600 mt-2">
-Traditional Pakistani spicy rice dish cooked with tender chicken and aromatic spices.
-</p>
-
-<div class="mt-4 flex justify-between items-center">
-<span class="text-orange-500 font-bold text-lg">$12</span>
-<button class="bg-orange-500 text-white px-4 py-2 rounded">Order</button>
-</div>
-</div>
-
-</div>
-
-
-
-<!-- Dish 2 -->
-<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-
-<img src="https://images.unsplash.com/photo-1604908176997-4313d7accb43" class="h-60 w-full object-cover">
-
-<div class="p-6">
-<h3 class="text-xl font-bold">Beef Karahi</h3>
-
-<p class="text-gray-600 mt-2">
-Rich and flavorful beef cooked with tomatoes, garlic and traditional spices.
-</p>
-
-<div class="mt-4 flex justify-between items-center">
-<span class="text-orange-500 font-bold text-lg">$15</span>
-<button class="bg-orange-500 text-white px-4 py-2 rounded">Order</button>
-</div>
-</div>
-
-</div>
-
-
-
-<!-- Dish 3 -->
-<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-
-<img src="https://images.unsplash.com/photo-1598514982901-3c7e7e7c7a6f" class="h-60 w-full object-cover">
-
-<div class="p-6">
-<h3 class="text-xl font-bold">Chicken Tikka</h3>
-
-<p class="text-gray-600 mt-2">
-Juicy grilled chicken marinated with yogurt and traditional BBQ spices.
-</p>
-
-<div class="mt-4 flex justify-between items-center">
-<span class="text-orange-500 font-bold text-lg">$10</span>
-<button class="bg-orange-500 text-white px-4 py-2 rounded">Order</button>
-</div>
-</div>
-
-</div>
-
-
-
-<!-- Dish 4 -->
-<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-
-<img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398" class="h-60 w-full object-cover">
-
-<div class="p-6">
-<h3 class="text-xl font-bold">Seekh Kebab</h3>
-
-<p class="text-gray-600 mt-2">
-Minced meat kebabs grilled on charcoal with authentic desi flavor.
-</p>
-
-<div class="mt-4 flex justify-between items-center">
-<span class="text-orange-500 font-bold text-lg">$9</span>
-<button class="bg-orange-500 text-white px-4 py-2 rounded">Order</button>
-</div>
-</div>
-
-</div>
-
-
-
-<!-- Dish 5 -->
-<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-
-<img src="https://images.unsplash.com/photo-1600628422019-52bfcfdc8e1b" class="h-60 w-full object-cover">
-
-<div class="p-6">
-<h3 class="text-xl font-bold">Butter Chicken</h3>
-
-<p class="text-gray-600 mt-2">
-Creamy tomato curry cooked with soft chicken and rich butter flavor.
-</p>
-
-<div class="mt-4 flex justify-between items-center">
-<span class="text-orange-500 font-bold text-lg">$13</span>
-<button class="bg-orange-500 text-white px-4 py-2 rounded">Order</button>
-</div>
-</div>
-
-</div>
-
-
-
-<!-- Dish 6 -->
-<div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition">
-
-<img src="https://images.unsplash.com/photo-1596797038530-2c107229654b" class="h-60 w-full object-cover">
-
-<div class="p-6">
-<h3 class="text-xl font-bold">Chapli Kebab</h3>
-
-<p class="text-gray-600 mt-2">
-Famous Peshawari style kebab made with minced beef and special spices.
-</p>
-
-<div class="mt-4 flex justify-between items-center">
-<span class="text-orange-500 font-bold text-lg">$11</span>
-<button class="bg-orange-500 text-white px-4 py-2 rounded">Order</button>
-</div>
-</div>
-
-</div>
-
-
-</div>
-</div>
-
+                    <div class="mt-4 flex justify-between items-center">
+                        <span class="text-orange-500 font-bold text-lg">{{ dish.price }}</span>
+                        <button class="bg-orange-500 text-white px-4 py-2 rounded">Order</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </section>
-
 
 </body>
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'core/css/main.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap">
-    <script src="https://cdn.tailwindcss.com"></script>
+    {% comment %} <script src="https://cdn.tailwindcss.com"></script> {% endcomment %}
     {% block title %}
     <title>Khana Khazana</title>
     {% endblock title %}
@@ -22,6 +22,7 @@
 
 
     {% block footer %}
+    
     {% endblock footer %}
 </body>
 </html>
