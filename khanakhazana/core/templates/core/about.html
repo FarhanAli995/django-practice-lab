@@ -1,14 +1,7 @@
-<!DOCTYPE html>
+{% extends "core/base.html" %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>about</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="">
 
+{% block about %}
 <!-- About Section -->
 <section class="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
 style="background-image: url('{% static "core/images/restaurant-background.jpg" %}');">
@@ -25,7 +18,7 @@ style="background-image: url('{% static "core/images/restaurant-background.jpg" 
                 About Khana Khazana
             </h1>
 
-            <p class="text-lg max-w-3xl mx-auto text-gray-600 ">
+            <p class="text-lg max-w-3xl mx-auto text-white ">
                 Welcome to Khana Khazana, where tradition meets taste. We bring you the
                 authentic flavors of traditional cuisine prepared with love, passion,
                 and the freshest ingredients.
@@ -37,7 +30,7 @@ style="background-image: url('{% static "core/images/restaurant-background.jpg" 
 
             <!-- Left Image -->
             <div class="overflow-hidden rounded-2xl shadow-2xl group">
-                <img src="{% static 'core/images/StockCake-Chef_serving_food-1246664-medium.jpg' %}"
+                <img src="{% static 'core/images/StockCake-Chef_serving_foodd-1246664-medium.jpg' %}"
                      class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
                      alt="Chef Image">
             </div>
@@ -49,14 +42,14 @@ style="background-image: url('{% static "core/images/restaurant-background.jpg" 
                     Our Story
                 </h2>
 
-                <p class="text-gray-600  leading-relaxed">
+                <p class="text-white  leading-relaxed">
                     Khana Khazana started with a simple dream: to serve delicious,
                     traditional food that brings people together. Our chefs combine
                     classic recipes with modern cooking techniques to create meals
                     that warm the heart and satisfy the soul.
                 </p>
 
-                <p class="text-gray-600  leading-relaxed">
+                <p class="text-white  leading-relaxed">
                     From spicy biryanis to rich curries and mouth-watering desserts,
                     every dish is prepared with dedication and passion. We believe
                     food is not just about taste — it's about creating unforgettable
@@ -68,22 +61,22 @@ style="background-image: url('{% static "core/images/restaurant-background.jpg" 
 
                     <div class="bg-white/10 p-6 rounded-xl backdrop-blur hover:bg-yellow-500 hover:text-black transition duration-500">
                         <h3 class="text-xl font-semibold mb-2">Fresh Ingredients</h3>
-                        <p class="text-sm text-gray-600 ">We use only fresh and high quality ingredients.</p>
+                        <p class="text-sm text-white ">We use only fresh and high quality ingredients.</p>
                     </div>
 
                     <div class="bg-white/10 p-6 rounded-xl backdrop-blur hover:bg-yellow-500 hover:text-black transition duration-500">
                         <h3 class="text-xl font-semibold mb-2">Expert Chefs</h3>
-                        <p class="text-sm text-gray-600">Our chefs have years of culinary experience.</p>
+                        <p class="text-sm text-white">Our chefs have years of culinary experience.</p>
                     </div>
 
                     <div class="bg-white/10 p-6 rounded-xl backdrop-blur hover:bg-yellow-500 hover:text-black transition duration-500">
                         <h3 class="text-xl font-semibold mb-2">Traditional Taste</h3>
-                        <p class="text-sm text-gray-600 ">Authentic flavors inspired by traditional recipes.</p>
+                        <p class="text-sm text-white ">Authentic flavors inspired by traditional recipes.</p>
                     </div>
 
                     <div class="bg-white/10 p-6 rounded-xl backdrop-blur hover:bg-yellow-500 hover:text-black transition duration-500">
                         <h3 class="text-xl font-semibold mb-2">Fast Service</h3>
-                        <p class="text-sm text-gray-600">Quick and friendly service for all customers.</p>
+                        <p class="text-sm text-white">Quick and friendly service for all customers.</p>
                     </div>
 
                 </div>
@@ -95,5 +88,7 @@ style="background-image: url('{% static "core/images/restaurant-background.jpg" 
     </div>
 
 </section>
-</body>
-</html>
+{% endblock about %}
+{% block footer %}
+{% include "core/footer.html" %}
+{% endblock footer %}
