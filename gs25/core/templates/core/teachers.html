@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Data</title>
+</head>
+<body>
+    <h1>Teacher Forms </h1>
+    <form action="" method = "Get">
+        {{data}}
+        <input type="submit" value="submit">
+    </form>
+
+    <h2>
+        How to Render form Field Manualy
+    </h2>
+
+    <div>
+       <label for="name_id">Name</label>
+       <input type="text" name="name" required id="name_id">
+       <input type="submit" value="submit">
+    </div>
+
+    <h2>
+        How to Render form Field Dynamically
+    </h2>
+
+<div>
+    <form action="" method = "get">
+       <label for="{{data.name.id_for_label}}">Name</label>
+            {{data.name}}
+
+       {{data.email.label_tag}}
+            {{data.email}}
+       <input type="submit" value="submit">
+    </form>
+</div>
+
+</body>
+</html>
