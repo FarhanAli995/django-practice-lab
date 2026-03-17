@@ -24,9 +24,12 @@ def teachers(request):
         if form.is_valid():
             print(form.cleaned_data)
 
-    context = {
+        else:
+            print(form.errors)
+
+        context = {
         'data': form
-    }
+        }
 
 
     return render(request, 'core/teachers.html', context)

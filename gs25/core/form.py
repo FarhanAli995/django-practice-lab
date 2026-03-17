@@ -94,6 +94,24 @@ class Teachers(forms.Form):
         }
     )
 
+    key = forms.CharField(
+        max_length=70,
+        required=True,
+        initial='default value',
+        widget= forms.HiddenInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'key_id',
+                'placeholder': 'Enter Your key'
+            }
+        ),
+        
+        error_messages={
+            'required': 'This field is required',
+            'invalid': 'Invalid value'
+        }
+    )
+
     def clean(self):
         cleaned_data = super().clean()
         return cleaned_data
