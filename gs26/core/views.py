@@ -3,15 +3,15 @@ from .form import StudentsData, TeachersData
 
 # Create your views here.
 def stud_data(request):
-
-    form = StudentsData(request.POST)
-
     if request.method == 'POST':
+        form = StudentsData(request.POST)
         if form.is_valid():
             print(form.cleaned_data)
+    else:
+        form = StudentsData()
 
     context = {
-        'data': form
+        'form': form
     }
 
     return render(request, 'core/home.html', context)
