@@ -7,7 +7,9 @@ class StudentsData(forms.Form):
         label_suffix=" ",
         initial="Sonam",
         required= False, 
-        disabled= True,   
+        disabled= True,  
+        help_text= "Not more than 70 characters",
+         
     )
 
 
@@ -15,5 +17,8 @@ class StudentsData(forms.Form):
 
 class TeachersData(forms.Form):
     Teacher_Name = forms.CharField(
-        label='Teacher Name',
+        widget= forms.Textarea,
+        label="Enter Your Name"
     )
+
+    

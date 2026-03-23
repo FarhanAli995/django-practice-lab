@@ -33,3 +33,4 @@ def teachers(request):
 
 
     return render(request, 'core/teachers.html', context)
+
