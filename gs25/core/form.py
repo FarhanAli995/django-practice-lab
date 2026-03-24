@@ -107,7 +107,7 @@ class Teachers(forms.Form):
         ),
         
         error_messages={
-            'required': 'This field is required',
+            'required': 'Enter Your key',
             'invalid': 'Invalid value'
         }
     )
