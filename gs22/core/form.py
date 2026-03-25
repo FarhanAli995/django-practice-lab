@@ -1,0 +1,117 @@
+from django import forms
+
+
+class StudentsData(forms.Form):
+    First_Name = forms.CharField(
+        max_length=50,
+        required=True,
+        initial='Farhan',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter value',
+                'id': 'first_name'  
+            }
+        ),
+        error_messages={
+            'required': 'This field is required',
+            'invalid': 'Invalid value'
+        }
+    )
+    Last_Name = forms.CharField(
+        max_length=50,
+        initial='Khan',
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter value',
+                'id': 'lname_id'
+            }
+        ),
+        error_messages={
+            'required': 'This field is required',
+            'invalid': 'Invalid value'
+        }
+    )
+
+    Email = forms.EmailField(
+        max_length=70,
+        required=True,
+        initial="alyfarhan4@gmail.com",
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter Email',
+                'id': 'email_id'
+            }
+        ),
+        error_messages={
+            'required': 'This field is required',
+            'invalid': 'Invalid value'
+        }
+    )   
+
+
+    def clean(self):
+        cleaned_data = super().clean()
+        return cleaned_data
+    
+class Teachers(forms.Form):
+    name = forms.CharField(
+        max_length=70,
+        required=True,
+        initial='default value',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'name_id',
+                'placeholder': 'Enter Your Name'
+            }
+        ),
+    
+        error_messages={
+            'required': 'This field is required',
+            'invalid': 'Invalid value'
+        }
+    )
+    email = forms.EmailField(
+        max_length=70,
+        required=True,
+        initial='default value',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'Email_id',
+                'placeholder': 'Enter Your Email'
+            }
+        ),
+    
+        error_messages={
+            'required': 'This field is required',
+            'invalid': 'Invalid value'
+        }
+    )
+
+    key = forms.CharField(
+        max_length=70,
+        required=True,
+        initial='default value',
+        widget= forms.HiddenInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'key_id',
+                'placeholder': 'Enter Your key'
+            }
+        ),
+        
+        error_messages={
+            'required': 'Enter Your key',
+            'invalid': 'Invalid value'
+        }
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        return cleaned_data
+
