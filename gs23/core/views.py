@@ -10,3 +10,5 @@ def showdata(request):
 def show_teacher_data(request):
     data = TeacherRegistration()
     return render(request, "core/teacher.html", {"data": data})
+
+
