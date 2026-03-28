@@ -1,0 +1,20 @@
+<header class="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-sm shadow-md border-b-4 border-orange-400">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-10 py-4">
+        <a href="{% url 'home' %}" 
+           class="text-5xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent hover:scale-110 transition-transform duration-300"
+           style="font-family:'Dancing Script', cursive;">
+            Khana Khazana
+        </a>
+
+        <nav class="flex-1 mx-12">
+            <ul class="flex space-x-16 list-none m-0 p-0">
+                <li>
+                    <a href="{% url 'home' %}" class="text-lg font-semibold text-gray-700 hover:text-orange-600 transition-colors duration-300 pb-2 border-b-2 border-transparent hover:border-orange-500 px-10">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'about' %}" class="text-lg font-semibold text-gray-700 hover:text-orange-600 transition-colors duration-300 pb-2 border-b-2 border-transparent hover:border-orange-500 px-10">About</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

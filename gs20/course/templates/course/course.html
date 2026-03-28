@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Course List</h1>
+    
+    {% if djangoCourse %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for x in djangoCourse %}
+                <tr>
+                    <td>{{ x.courseName }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No courses available. Please add courses in the admin panel.</p>
+    {% endif %}
+
+        </tr>
+
+    {% for student in djangoCourse %}
+    <tr>
+        <td>{{ student.courseName }}</td>
+        <td>{{ student.courseFee }}</td>
+    </tr>
+    {% endfor %}
+</body>
+</html>

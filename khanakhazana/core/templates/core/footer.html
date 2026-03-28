@@ -1,0 +1,94 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block footer %}
+<!-- Footer Section -->
+<footer class="relative bg-cover bg-center bg-no-repeat text-white"
+style="background-image: url('{% static "core/images/biryani.png" %}');">
+
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
+
+    <!-- Footer Content -->
+    <div class="relative max-w-7xl mx-auto px-6 py-16">
+
+        <!-- Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+            <!-- Brand Section -->
+            <div class="space-y-4">
+                <h2 class="text-3xl font-bold text-orange-400 hover:scale-110 transition duration-300">
+                    Foodies
+                </h2>
+                <p class="text-gray-300 text-sm leading-relaxed">
+                    Enjoy the most delicious traditional food made with fresh ingredients and love.
+                    We bring authentic taste directly to your table.
+                </p>
+
+                <!-- Social Icons -->
+                <div class="flex gap-4 mt-4">
+                    <a href="#" class="p-2 bg-white/10 rounded-full hover:bg-orange-500 hover:scale-110 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22 12a10 10 0 10-11.5 9.87v-6.99h-2.4V12h2.4V9.8c0-2.38 1.42-3.7 3.6-3.7 1.04 0 2.13.18 2.13.18v2.35h-1.2c-1.18 0-1.54.73-1.54 1.48V12h2.62l-.42 2.88h-2.2v6.99A10 10 0 0022 12z"/>
+                        </svg>
+                    </a>
+
+                    <a href="#" class="p-2 bg-white/10 rounded-full hover:bg-pink-500 hover:scale-110 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm4.25 5a5 5 0 100 10 5 5 0 000-10zm6.5-.25a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5z"/>
+                        </svg>
+                    </a>
+
+                    <a href="#" class="p-2 bg-white/10 rounded-full hover:bg-blue-500 hover:scale-110 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22.46 6c-.77.35-1.6.59-2.46.69a4.3 4.3 0 001.89-2.37 8.57 8.57 0 01-2.73 1.04A4.28 4.28 0 0016.11 4c-2.36 0-4.28 1.92-4.28 4.29 0 .34.04.67.11.98C8.3 9.1 5.37 7.38 3.4 4.79a4.28 4.28 0 00-.58 2.15c0 1.48.75 2.78 1.88 3.54a4.2 4.2 0 01-1.94-.53v.05c0 2.06 1.46 3.78 3.4 4.17a4.28 4.28 0 01-1.93.07c.54 1.69 2.1 2.92 3.96 2.95A8.59 8.59 0 012 19.54a12.11 12.11 0 006.56 1.92c7.87 0 12.17-6.52 12.17-12.17l-.01-.55A8.64 8.64 0 0022.46 6z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-orange-400">Quick Links</h3>
+                <ul class="space-y-3">
+                    <li><a  href="{% url 'home' %}" class="hover:text-orange-400 hover:translate-x-2 transition duration-300 inline-block">Home</a></li>
+                    <li><a href="#" class="hover:text-orange-400 hover:translate-x-2 transition duration-300 inline-block">Menu</a></li>
+                    <li><a href="{% url 'about' %}"class="hover:text-orange-400 hover:translate-x-2 transition duration-300 inline-block">About</a></li>
+                    <li><a href="#" class="hover:text-orange-400 hover:translate-x-2 transition duration-300 inline-block">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-orange-400">Services</h3>
+                <ul class="space-y-3">
+                    <li class="hover:text-orange-400 transition">Online Order</li>
+                    <li class="hover:text-orange-400 transition">Fast Delivery</li>
+                    <li class="hover:text-orange-400 transition">Fresh Food</li>
+                    <li class="hover:text-orange-400 transition">24/7 Support</li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h3 class="text-xl font-semibold mb-4 text-orange-400">Contact Us</h3>
+                <p class="text-gray-300 text-sm mb-2">📍 Rawalpindi, Pakistan</p>
+                <p class="text-gray-300 text-sm mb-2">📞 +92 300 1234567</p>
+                <p class="text-gray-300 text-sm mb-4">✉ foodies@email.com</p>
+
+                <button class="bg-orange-500 px-6 py-2 rounded-full 
+                hover:bg-orange-600 hover:scale-105 transition duration-300 shadow-lg">
+                    Order Now
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-gray-600 mt-10 pt-6 text-center text-gray-400 text-sm">
+            © 2026 Foodies Restaurant | All Rights Reserved
+        </div>
+
+    </div>
+</footer>
+{% endblock footer %}
+
