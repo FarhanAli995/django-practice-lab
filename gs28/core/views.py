@@ -3,6 +3,6 @@ from .form import StudentRegistration
 
 # Create your views here.
 
-def showformdata(request):
+def home(request):
     form = StudentRegistration()
     return render(request, 'home.html', {'form': form})
