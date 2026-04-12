@@ -34,7 +34,24 @@ class StudentRegistration(forms.Form):
             'invalid': 'Invalid value'
         }
     )
-   
+
+    Father_name = forms.CharField(
+        max_length=50,
+        required=True,
+        initial='',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'field_id',
+                'placeholder': 'Enter Your Father Name'
+            }
+        ),
+        error_messages={
+            'required': 'This field is required',
+            'invalid': 'Invalid value'
+        }
+    )
+
 
     def clean(self):
         cleaned_data = super().clean()
