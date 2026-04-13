@@ -22,7 +22,7 @@ style="background-image: url('{% static 'core/images/biryani.png' %}');">
         </p>
 
         <button class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition">
-            Order Now
+           <a href="{% url 'menu' %}"> Order Now</a>
         </button>
 
     </div>
@@ -60,6 +60,14 @@ style="background-image: url('{% static 'core/images/biryani.png' %}');">
             {% endfor %}
         </div>
     </div>
+
+<div class="text-center mt-8">
+    <a href="{% url 'menu' %}" 
+       class="inline-block text-lg font-semibold  bg-orange-500 hover:bg-orange-600 text-white rounded-3xl px-8 py-3 shadow-md hover:shadow-lg transition-all duration-300 ">
+        Show More
+    </a>
+</div>
+
 </section>
 
 </body>

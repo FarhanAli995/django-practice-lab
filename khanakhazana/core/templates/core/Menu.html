@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gourmet Menu & Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for cart modal */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-900 mb-10">Our Culinary Selection</h2>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Explore our diverse menu featuring 20 unique categories. Click any category to reveal exquisite dishes crafted by our master chefs.</p>
+        </div>
+
+        <!-- Menu Container -->
+        <div id="menu-container" class="space-y-4">
+            <!-- Categories will be injected here by JavaScript -->
+        </div>
+    </main>
+
+    <!-- Cart Trigger Button (Floating) -->
+    <button onclick="toggleCart()" class="fixed bottom-8 right-8 z-40 group flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-4 rounded-full transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        <span class="font-semibold">Cart</span>
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-yellow-400 text-gray-900 text-xs font-bold w-6 h-6 flex items-center justify-center rounded-full border-2 border-white transform scale-0 transition-transform duration-300">0</span>
+    </button>
+
+    <!-- Cart Modal Overlay -->
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity opacity-0" id="cart-backdrop" onclick="toggleCart()"></div>
+
+        <!-- Modal Panel -->
+        <div class="fixed inset-y-0 right-0 flex max-w-full pl-10 pointer-events-none">
+            <div class="w-screen max-w-md pointer-events-auto transform transition ease-in-out duration-500 translate-x-full" id="cart-panel">
+                <div class="flex h-full flex-col bg-white shadow-2xl">
+                    <!-- Cart Header -->
+                    <div class="flex items-start justify-between px-6 py-6 border-b border-gray-100">
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900" id="modal-title">Your Order</h2>
+                            <p class="text-sm text-gray-500 mt-1">Review your selected items</p>
+                        </div>
+                        <button type="button" class="rounded-md text-gray-400 hover:text-gray-500 focus:outline-none" onclick="toggleCart()">
+                            <span class="sr-only">Close panel</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Cart Items List -->
+                    <div class="relative flex-1 px-6 py-6 overflow-y-auto scrollbar-hide">
+                        <div id="cart-items-container" class="space-y-6">
+                            <!-- Empty State -->
+                            <div id="empty-cart-msg" class="flex flex-col items-center justify-center h-full text-center text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mb-4 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                </svg>
+                                <p class="text-lg font-medium">Your cart is empty</p>
+                                <p class="text-sm">Add some delicious items!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cart Footer / Total -->
+                    <div class="border-t border-gray-100 px-6 py-6 bg-gray-50">
+                        <div class="flex justify-between text-base font-medium text-gray-900 mb-4">
+                            <p>Subtotal</p>
+                            <p id="cart-total">$0.00</p>
+                        </div>
+                        <p class="mt-0.5 text-sm text-gray-500 mb-6">Shipping and taxes calculated at checkout.</p>
+                        <div class="mt-6">
+                            <button onclick="alert('Proceeding to checkout with total: ' + document.getElementById('cart-total').innerText)" class="flex w-full items-center justify-center rounded-lg border border-transparent bg-orange-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-orange-600 transition-colors">
+                                Checkout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Data Structure ---
+        // 20 Categories, each with 10 Dishes
+        const categories = [
+            "Appetizers", "Salads", "Soups", "Pasta", "Pizza", 
+            "Seafood", "Steaks", "Burgers", "Sandwiches", "Vegetarian",
+            "Vegan", "Gluten-Free", "Desserts", "Beverages", "Cocktails",
+            "Breakfast", "Brunch", "Kids Menu", "Sides", "Specials"
+        ];
+
+        const adjectives = ["Grilled", "Pan-Seared", "Roasted", "Fresh", "Spicy", "Creamy", "Crispy", "Tender", "Zesty", "Savory"];
+        const nouns = ["Chicken", "Salmon", "Beef", "Pasta", "Salad", "Soup", "Burger", "Pizza", "Tacos", "Steak"];
+        
+        // Deterministic data generation helper
+        function generateDish(categoryIndex, dishIndex) {
+            const categoryName = categories[categoryIndex];
+            const adj = adjectives[(categoryIndex + dishIndex) % adjectives.length];
+            const noun = nouns[(categoryIndex * 2 + dishIndex) % nouns.length];
+            
+            // Deterministic price based on indices to ensure consistency
+            const basePrice = 10 + (categoryIndex * 2);
+            const variation = dishIndex * 1.5;
+            const price = (basePrice + variation).toFixed(2);
+
+            // Use Unsplash source with specific keywords for variety
+            const keywords = `${categoryName},${adj},${noun},food`;
+            const imageUrl = `https://source.unsplash.com/400x300/?${encodeURIComponent(keywords)}&sig=${categoryIndex * 10 + dishIndex}`;
+
+            return {
+                id: `cat-${categoryIndex}-dish-${dishIndex}`,
+                name: `${adj} ${categoryName} ${noun} ${dishIndex + 1}`,
+                details: `A delicious combination of fresh ingredients, featuring our signature ${adj.toLowerCase()} style.`,
+                price: parseFloat(price),
+                image: imageUrl
+            };
+        }
+
+        // State
+        let cart = [];
+        let expandedCategories = new Set(); // Track which categories are open
+
+        // --- DOM Elements ---
+        const menuContainer = document.getElementById('menu-container');
+        const cartCountEl = document.getElementById('cart-count');
+        const cartTotalEl = document.getElementById('cart-total');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const emptyCartMsg = document.getElementById('empty-cart-msg');
+        const cartModal = document.getElementById('cart-modal');
+        const cartBackdrop = document.getElementById('cart-backdrop');
+        const cartPanel = document.getElementById('cart-panel');
+
+        // --- Initialization ---
+        function init() {
+            renderMenu();
+        }
+
+        // --- Rendering Logic ---
+        function renderMenu() {
+            menuContainer.innerHTML = categories.map((catName, catIndex) => {
+                const isExpanded = expandedCategories.has(catIndex);
+                const dishes = Array.from({length: 10}, (_, i) => generateDish(catIndex, i));
+                
+                return `
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+                        <!-- Category Header (Clickable) -->
+                        <button onclick="toggleCategory(${catIndex})" class="w-full flex items-center justify-between p-6 bg-white hover:bg-gray-50 transition-colors focus:outline-none">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-100 to-orange-100 flex items-center justify-center text-orange-600 font-bold text-lg shadow-inner">
+                                    ${catIndex + 1}
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-800">${catName}</h3>
+                            </div>
+                            <div class="transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                        </button>
+
+                        <!-- Collapsible Content -->
+                        <div id="category-content-${catIndex}" class="${isExpanded ? 'block' : 'hidden'} border-t border-gray-100 bg-gray-50/50">
+                            <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                ${dishes.map(dish => `
+                                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300 group">
+                                        <div class="relative h-48 overflow-hidden">
+                                            <img src="${dish.image}" alt="${dish.name}" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                                            <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-gray-900 shadow-sm">
+                                                $${dish.price.toFixed(2)}
+                                            </div>
+                                        </div>
+                                        <div class="p-5 flex-1 flex flex-col">
+                                            <h4 class="font-bold text-gray-900 text-lg mb-2 line-clamp-1">${dish.name}</h4>
+                                            <p class="text-gray-500 text-sm mb-4 line-clamp-2 flex-1">${dish.details}</p>
+                                            <button onclick="addToCart('${dish.id}', '${dish.name}', ${dish.price})" 
+                                                class="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-2.5 px-4 rounded-lg transition-colors duration-300 flex items-center justify-center gap-2 group-hover:shadow-md">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                                </svg>
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- Interaction Logic ---
+
+        // Toggle category expansion
+        window.toggleCategory = function(index) {
+            if (expandedCategories.has(index)) {
+                expandedCategories.delete(index);
+            } else {
+                expandedCategories.add(index);
+            }
+            renderMenu(); // Re-render to show/hide content and update arrow
+        };
+
+        // Add item to cart
+        window.addToCart = function(id, name, price) {
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+            
+            updateCartUI();
+            
+            // Visual feedback on button (optional simple animation logic could go here)
+            // For now, we just update the cart count badge animation
+            cartCountEl.classList.remove('scale-0');
+            cartCountEl.classList.add('scale-125');
+            setTimeout(() => cartCountEl.classList.remove('scale-125'), 200);
+        };
+
+        // Remove item from cart
+        window.removeFromCart = function(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        };
+
+        // Update quantity
+        window.updateQuantity = function(id, change) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(id);
+                } else {
+                    updateCartUI();
+                }
+            }
+        };
+
+        // Update Cart UI (Badge, List, Total)
+        function updateCartUI() {
+            // Update Count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountEl.innerText = totalItems;
+            if (totalItems > 0) {
+                cartCountEl.classList.remove('scale-0');
+            } else {
+                cartCountEl.classList.add('scale-0');
+            }
+
+            // Update Total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotalEl.innerText = `$${total.toFixed(2)}`;
+
+            // Update List
+            if (cart.length === 0) {
+                emptyCartMsg.style.display = 'flex';
+                cartItemsContainer.innerHTML = '';
+                cartItemsContainer.appendChild(emptyCartMsg);
+            } else {
+                emptyCartMsg.style.display = 'none';
+                cartItemsContainer.innerHTML = cart.map(item => `
+                    <div class="flex items-center justify-between py-2">
+                        <div class="flex-1">
+                            <h4 class="text-sm font-medium text-gray-900">${item.name}</h4>
+                            <p class="text-xs text-gray-500">$${item.price.toFixed(2)} each</p>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="flex items-center border border-gray-200 rounded-lg">
+                                <button onclick="updateQuantity('${item.id}', -1)" class="px-2 py-1 text-gray-600 hover:bg-gray-100 rounded-l-lg transition-colors">-</button>
+                                <span class="px-2 text-sm font-medium text-gray-900 min-w-[1.5rem] text-center">${item.quantity}</span>
+                                <button onclick="updateQuantity('${item.id}', 1)" class="px-2 py-1 text-gray-600 hover:bg-gray-100 rounded-r-lg transition-colors">+</button>
+                            </div>
+                            <button onclick="removeFromCart('${item.id}')" class="text-gray-400 hover:text-red-500 transition-colors p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // --- Modal Logic ---
+        let isCartOpen = false;
+        window.toggleCart = function() {
+            isCartOpen = !isCartOpen;
+            
+            if (isCartOpen) {
+                cartModal.classList.remove('hidden');
+                // Small delay to allow display:block to apply before opacity transition
+                setTimeout(() => {
+                    cartBackdrop.classList.remove('opacity-0');
+                    cartPanel.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                cartBackdrop.classList.add('opacity-0');
+                cartPanel.classList.add('translate-x-full');
+                setTimeout(() => {
+                    cartModal.classList.add('hidden');
+                }, 500); // Match transition duration
+            }
+        };
+
+        // Start
+        init();
+
+    </script>
+
+    <div>
+        <div>
+            {% block footer %}
+                {% include "core/footer.html" %}
+            {% endblock footer %}
+        </div>
+    </div>
+</body>
+</html>

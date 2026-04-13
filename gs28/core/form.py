@@ -52,6 +52,25 @@ class StudentRegistration(forms.Form):
         }
     )
 
+    phone_number = forms.IntegerField(
+        max_length=50,
+        required=True,
+        initial='',
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'id': 'field_id',
+                'placeholder': 'Enter Your Mobile Number'
+            }
+        ),
+        error_messages={
+            'required': 'This field is required',
+            'invalid': 'Invalid value'
+        }
+    )
+
+    
+
 
     def clean(self):
         cleaned_data = super().clean()
