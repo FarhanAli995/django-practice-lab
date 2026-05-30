@@ -1,94 +1,62 @@
 {% extends "core/base.html" %}
 {% load static %}
 
-{% block about %}
-<!-- About Section -->
-<section class="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
-style="background-image: url('{% static "core/images/restaurant-background.jpg" %}');">
+{% block title %}
+<title>Khana Khazana | About</title>
+{% endblock title %}
 
-    <!-- Dark Overlay -->
-    <div class="absolute inset-0 "></div>
+{% block maincontent %}
+<section class="relative isolate overflow-hidden px-6 pb-16 pt-32 md:px-10">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(251,191,36,0.18),_transparent_30%),linear-gradient(180deg,_rgba(12,10,9,0.6),_rgba(12,10,9,0.96))]"></div>
+    <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('{% static 'core/images/restaurant-background.jpg' %}');"></div>
 
-    <!-- Content -->
-    <div class="relative max-w-6xl mx-auto px-6 py-20 text-black">
-
-        <!-- Heading -->
-        <div class="text-center mb-16">
-            <h1 class="text-5xl font-bold mb-6 text-yellow-400 transition duration-500">
-                About Khana Khazana
+    <div class="relative mx-auto max-w-7xl">
+        <div class="max-w-3xl">
+            <p class="text-sm font-bold uppercase tracking-[0.35em] text-amber-300">About Khana Khazana</p>
+            <h1 class="mt-5 font-['Playfair_Display'] text-5xl font-extrabold leading-tight text-white md:text-6xl">
+                Built around traditional flavors and a more polished restaurant experience.
             </h1>
-
-            <p class="text-lg max-w-3xl mx-auto text-white ">
-                Welcome to Khana Khazana, where tradition meets taste. We bring you the
-                authentic flavors of traditional cuisine prepared with love, passion,
-                and the freshest ingredients.
+            <p class="mt-6 text-lg leading-8 text-stone-300">
+                Khana Khazana started with a simple goal: serve Pakistani favorites with real depth, careful cooking, and a setting that feels welcoming from lunch to late dinner.
             </p>
         </div>
 
-        <!-- Grid Section -->
-        <div class="grid md:grid-cols-2 gap-12 items-center">
-
-            <!-- Left Image -->
-            <div class="overflow-hidden rounded-2xl shadow-2xl group">
-                <img src="{% static 'core/images/StockCake-Chef_serving_foodd-1246664-medium.jpg' %}"
-                     class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700"
-                     alt="Chef Image">
+        <div class="mt-14 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+            <div class="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl shadow-black/30">
+                <img src="{% static 'core/images/StockCake-Chef_serving_food-1246664-medium.jpg' %}" alt="Chef serving food at Khana Khazana" class="h-full min-h-[420px] w-full object-cover">
             </div>
 
-            <!-- Right Content -->
             <div class="space-y-6">
-
-                <h2 class="text-3xl font-semibold text-yellow-400">
-                    Our Story
-                </h2>
-
-                <p class="text-white  leading-relaxed">
-                    Khana Khazana started with a simple dream: to serve delicious,
-                    traditional food that brings people together. Our chefs combine
-                    classic recipes with modern cooking techniques to create meals
-                    that warm the heart and satisfy the soul.
-                </p>
-
-                <p class="text-white  leading-relaxed">
-                    From spicy biryanis to rich curries and mouth-watering desserts,
-                    every dish is prepared with dedication and passion. We believe
-                    food is not just about taste — it's about creating unforgettable
-                    experiences.
-                </p>
-
-                <!-- Features -->
-                <div class="grid grid-cols-2 gap-6 mt-8">
-
-                    <div class="bg-white/10 p-6 rounded-xl backdrop-blur hover:bg-yellow-500 hover:text-black transition duration-500">
-                        <h3 class="text-xl font-semibold mb-2">Fresh Ingredients</h3>
-                        <p class="text-sm text-white ">We use only fresh and high quality ingredients.</p>
-                    </div>
-
-                    <div class="bg-white/10 p-6 rounded-xl backdrop-blur hover:bg-yellow-500 hover:text-black transition duration-500">
-                        <h3 class="text-xl font-semibold mb-2">Expert Chefs</h3>
-                        <p class="text-sm text-white">Our chefs have years of culinary experience.</p>
-                    </div>
-
-                    <div class="bg-white/10 p-6 rounded-xl backdrop-blur hover:bg-yellow-500 hover:text-black transition duration-500">
-                        <h3 class="text-xl font-semibold mb-2">Traditional Taste</h3>
-                        <p class="text-sm text-white ">Authentic flavors inspired by traditional recipes.</p>
-                    </div>
-
-                    <div class="bg-white/10 p-6 rounded-xl backdrop-blur hover:bg-yellow-500 hover:text-black transition duration-500">
-                        <h3 class="text-xl font-semibold mb-2">Fast Service</h3>
-                        <p class="text-sm text-white">Quick and friendly service for all customers.</p>
-                    </div>
-
+                <div class="rounded-[2rem] border border-white/10 bg-white/5 p-8 backdrop-blur">
+                    <p class="text-sm uppercase tracking-[0.3em] text-amber-300">Our Story</p>
+                    <p class="mt-4 leading-8 text-stone-300">
+                        What began as a passion for biryani, karahi, and charcoal-grilled staples became a menu shaped around comfort, generosity, and dishes people actually come back for.
+                    </p>
+                    <p class="mt-4 leading-8 text-stone-300">
+                        We combine classic recipes, steady kitchen discipline, and fresh ingredients so every plate feels familiar but still restaurant-worthy.
+                    </p>
                 </div>
 
+                <div class="grid gap-6 sm:grid-cols-2">
+                    <div class="rounded-[1.75rem] border border-amber-300/15 bg-amber-300/10 p-6">
+                        <h2 class="font-['Playfair_Display'] text-2xl font-bold text-white">Fresh Ingredients</h2>
+                        <p class="mt-3 text-sm leading-7 text-stone-300">Daily prep, real herbs, and balanced spice blends instead of shortcuts.</p>
+                    </div>
+                    <div class="rounded-[1.75rem] border border-orange-300/15 bg-orange-400/10 p-6">
+                        <h2 class="font-['Playfair_Display'] text-2xl font-bold text-white">Expert Kitchen</h2>
+                        <p class="mt-3 text-sm leading-7 text-stone-300">A menu grounded in technique, timing, and consistency during busy service.</p>
+                    </div>
+                    <div class="rounded-[1.75rem] border border-white/10 bg-stone-900/80 p-6">
+                        <h2 class="font-['Playfair_Display'] text-2xl font-bold text-white">Traditional Taste</h2>
+                        <p class="mt-3 text-sm leading-7 text-stone-300">Authentic flavor profiles that keep the food recognizable and satisfying.</p>
+                    </div>
+                    <div class="rounded-[1.75rem] border border-white/10 bg-stone-900/80 p-6">
+                        <h2 class="font-['Playfair_Display'] text-2xl font-bold text-white">Fast Service</h2>
+                        <p class="mt-3 text-sm leading-7 text-stone-300">Comfort food made for real restaurant pace, not long uncertain waits.</p>
+                    </div>
+                </div>
             </div>
-
         </div>
-
     </div>
-
 </section>
-{% endblock about %}
-{% block footer %}
-{% include "core/footer.html" %}
-{% endblock footer %}
+{% endblock maincontent %}

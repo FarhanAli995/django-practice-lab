@@ -4,25 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Khana Khazana serves bold Pakistani flavors, signature biryanis, grilled favorites, and family-style dining in a refined setting.">
     <link rel="stylesheet" href="{% static 'core/css/main.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap">
     
     {% block title %}
     <title>Khana Khazana</title>
     {% endblock title %}
 </head>
 
-<body class="bg-gradient-to-br from-orange-50 via-amber-50 to-white min-h-screen font-sans antialiased">
+<body class="min-h-screen bg-stone-950 font-[Manrope] text-stone-100 antialiased">
     
     {% include "core/components/navbar.html" %}
 
-    {% block maincontent %}{% endblock maincontent %}
-
-    {% block about %}{% endblock about %}
-
+    <main>
+        {% if messages %}
+        <div class="fixed right-4 top-24 z-50 flex w-full max-w-sm flex-col gap-3">
+            {% for message in messages %}
+            <div class="rounded-2xl border border-amber-300/20 bg-stone-950/95 px-4 py-3 text-sm text-stone-100 shadow-xl shadow-black/30 backdrop-blur">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% block maincontent %}{% endblock maincontent %}
+    </main>
 
     {% block footer %}
-    
+    {% include "core/footer.html" %}
     {% endblock footer %}
 </body>
 </html>

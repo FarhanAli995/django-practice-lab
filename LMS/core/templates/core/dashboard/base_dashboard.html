@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block dashboard_title %}Dashboard{% endblock %} — KIU LMS</title>
+    <link rel="stylesheet" href="{% static 'core/css/main.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-body">
+    {% include "core/components/dashboard_sidebar.html" %}
+
+    <div class="dashboard-main">
+        {% include "core/components/dashboard_header.html" %}
+
+        <div class="dashboard-content">
+            {% block dashboard_content %}{% endblock %}
+        </div>
+    </div>
+
+    <script src="{% static 'core/js/homepage.js' %}"></script>
+    {% block dashboard_js %}{% endblock %}
+</body>
+</html>

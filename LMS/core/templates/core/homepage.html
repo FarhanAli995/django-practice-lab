@@ -1,0 +1,176 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block title %}<title>KIU LMS — Welcome</title>{% endblock title %}
+
+{% block maincontent %}
+
+<section class="hero" id="home">
+    <div class="hero-bg-shapes" aria-hidden="true">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+    <div class="container hero-grid">
+        <div class="hero-content">
+            <span class="hero-badge">Transforming Education Through Technology</span>
+            <h1 class="hero-title">
+                {% if hero %}{{ hero.title }}{% else %}Welcome to KIU Learning Management System{% endif %}
+            </h1>
+            <p class="hero-subtitle">{% if hero %}{{ hero.subtitle }}{% else %}Learn Anytime, Anywhere{% endif %}</p>
+            <p class="hero-description">
+                {% if hero and hero.description %}{{ hero.description }}
+                {% else %}Access courses, assignments, quizzes, announcements and academic resources from a single platform.{% endif %}
+            </p>
+            <div class="hero-actions">
+                <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Login</a>
+                <a href="#courses" class="btn btn-secondary btn-lg">Explore Courses</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-image-wrapper">
+                {% if hero and hero.image %}
+                <img src="{{ hero.image.url }}" alt="KIU Students" class="hero-image">
+                {% else %}
+                <img src="{% static 'core/images/1.jpg' %}" alt="KIU Students" class="hero-image" onerror="this.parentElement.innerHTML='<div class=hero-placeholder><span>🎓</span><p>Student Learning Portal</p></div>'">
+                {% endif %}
+            </div>
+            <div class="hero-floating-card">
+                <span class="floating-icon">📚</span>
+                <div><strong>5000+</strong><span>Active Learners</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="stats-section">
+    <div class="container stats-grid">
+        <div class="stat-card"><span class="stat-number" data-target="{{ stats.total_students }}">0</span><span class="stat-suffix">+</span><p>Students</p></div>
+        <div class="stat-card"><span class="stat-number" data-target="{{ stats.total_faculty }}">0</span><span class="stat-suffix">+</span><p>Faculty</p></div>
+        <div class="stat-card"><span class="stat-number" data-target="{{ stats.total_courses }}">0</span><span class="stat-suffix">+</span><p>Courses</p></div>
+        <div class="stat-card"><span class="stat-number" data-target="{{ stats.success_rate }}">0</span><span class="stat-suffix">%</span><p>Success Rate</p></div>
+    </div>
+</section>
+
+<section class="section why-choose" id="why-choose">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge">Our Advantages</span>
+            <h2>Why Choose KIU LMS</h2>
+            <p>Everything you need for a complete digital learning experience.</p>
+        </div>
+        <div class="why-grid">
+            {% if why_choose %}
+                {% for item in why_choose %}
+                <div class="why-item"><span class="why-check">✓</span><div><h3>{{ item.title }}</h3>{% if item.description %}<p>{{ item.description }}</p>{% endif %}</div></div>
+                {% endfor %}
+            {% else %}
+                <div class="why-item"><span class="why-check">✓</span><div><h3>Online Learning</h3></div></div>
+                <div class="why-item"><span class="why-check">✓</span><div><h3>Interactive Quizzes</h3></div></div>
+                <div class="why-item"><span class="why-check">✓</span><div><h3>Assignment Tracking</h3></div></div>
+                <div class="why-item"><span class="why-check">✓</span><div><h3>Real Time Grades</h3></div></div>
+                <div class="why-item"><span class="why-check">✓</span><div><h3>Attendance Monitoring</h3></div></div>
+                <div class="why-item"><span class="why-check">✓</span><div><h3>Discussion Forums</h3></div></div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="section courses-section" id="courses">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge">Explore Learning</span>
+            <h2>Featured Courses</h2>
+            <p>Discover our latest and most popular academic programs.</p>
+        </div>
+        <div class="courses-grid">
+            {% for course in featured_courses %}
+            <article class="course-card">
+                <div class="course-icon">{{ course.icon }}</div>
+                <h3>{{ course.title }}</h3>
+                <p>{{ course.description }}</p>
+                <a href="{% url 'login' %}" class="course-link">Enroll Now →</a>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section features-section" id="features">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge">Platform Capabilities</span>
+            <h2>LMS Features</h2>
+            <p>Powerful tools designed for students, faculty, and administrators.</p>
+        </div>
+        <div class="features-grid">
+            {% if lms_features %}
+                {% for f in lms_features %}
+                <div class="feature-card"><div class="feature-icon">{{ f.icon|default:"📌" }}</div><h3>{{ f.title }}</h3><p>{{ f.description }}</p></div>
+                {% endfor %}
+            {% else %}
+                <div class="feature-card"><div class="feature-icon">📖</div><h3>Course Management</h3><p>Manage all courses, materials, and schedules.</p></div>
+                <div class="feature-card"><div class="feature-icon">📝</div><h3>Assignments</h3><p>Submit assignments online and track deadlines.</p></div>
+                <div class="feature-card"><div class="feature-icon">✅</div><h3>Quizzes</h3><p>Take online examinations with instant feedback.</p></div>
+                <div class="feature-card"><div class="feature-icon">📅</div><h3>Attendance</h3><p>Track attendance for every class session.</p></div>
+                <div class="feature-card"><div class="feature-icon">💬</div><h3>Messaging</h3><p>Communicate instantly with instructors and peers.</p></div>
+                <div class="feature-card"><div class="feature-icon">📈</div><h3>Analytics</h3><p>Track academic progress with detailed insights.</p></div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="section announcements-section" id="announcements">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-badge">Stay Updated</span>
+            <h2>Latest University Announcements</h2>
+        </div>
+        <div class="announcements-list">
+            {% if announcements %}
+                {% for a in announcements %}
+                <article class="announcement-card">
+                    <div class="announcement-date"><span class="date-day">{{ a.created_at|date:"d" }}</span><span class="date-month">{{ a.created_at|date:"M" }}</span></div>
+                    <div class="announcement-body"><h3>{{ a.title }}</h3>{% if a.description %}<p>{{ a.description }}</p>{% endif %}</div>
+                </article>
+                {% endfor %}
+            {% else %}
+                <article class="announcement-card"><div class="announcement-date"><span class="date-day">10</span><span class="date-month">Jun</span></div><div class="announcement-body"><h3>Mid Term Exams Starting from 10 June</h3><p>Check your exam schedules on the portal.</p></div></article>
+                <article class="announcement-card"><div class="announcement-date"><span class="date-day">15</span><span class="date-month">Jun</span></div><div class="announcement-body"><h3>Holiday Notice</h3><p>University will remain closed on public holidays.</p></div></article>
+                <article class="announcement-card"><div class="announcement-date"><span class="date-day">20</span><span class="date-month">Jun</span></div><div class="announcement-body"><h3>Course Registration Deadline</h3><p>Last date to register is 20 June.</p></div></article>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="section testimonials-section">
+    <div class="container">
+        <div class="section-header"><span class="section-badge">Student Voices</span><h2>Student Feedback</h2></div>
+        <div class="testimonials-grid">
+            {% if testimonials %}
+                {% for t in testimonials %}
+                <blockquote class="testimonial-card">
+                    <div class="stars">{% for i in "12345" %}{% if forloop.counter <= t.rating %}★{% else %}☆{% endif %}{% endfor %}</div>
+                    <p>"{{ t.content }}"</p>
+                    <footer><strong>{{ t.name }}</strong>{% if t.role %}<span>{{ t.role }}</span>{% endif %}</footer>
+                </blockquote>
+                {% endfor %}
+            {% else %}
+                <blockquote class="testimonial-card"><div class="stars">★★★★★</div><p>"This LMS made learning easier."</p><footer><strong>Ayesha Khan</strong><span>CS Student</span></footer></blockquote>
+                <blockquote class="testimonial-card"><div class="stars">★★★★★</div><p>"Grade tracking keeps me on top of my progress."</p><footer><strong>Usman Ali</strong><span>BA Student</span></footer></blockquote>
+                <blockquote class="testimonial-card"><div class="stars">★★★★★</div><p>"Managing courses has never been this efficient."</p><footer><strong>Dr. Sara Ahmed</strong><span>Faculty</span></footer></blockquote>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container cta-inner">
+        <div><h2>Ready to Start Learning?</h2><p>Join thousands of students at KIU and take your education to the next level.</p></div>
+        <div class="cta-actions">
+            <a href="{% url 'register' %}" class="btn btn-secondary btn-lg">Get Started</a>
+            <a href="{% url 'dashboard' %}" class="btn btn-outline-light btn-lg">View Dashboard Demo</a>
+        </div>
+    </div>
+</section>
+
+{% endblock maincontent %}

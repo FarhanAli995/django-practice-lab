@@ -1,0 +1,1 @@
+from django.urls import path\nfrom apps.users.views import RegisterView\nfrom rest_framework_simplejwt.views import TokenRefreshView\n\nurlpatterns = [\n    path('register/', RegisterView.as_view(), name='register'),\n    path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),\n]\n

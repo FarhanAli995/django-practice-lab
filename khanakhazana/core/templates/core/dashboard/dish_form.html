@@ -1,0 +1,33 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+<title>Khana Khazana | {{ page_title }}</title>
+{% endblock title %}
+
+{% block maincontent %}
+<section class="px-6 pb-16 pt-32 md:px-10">
+    <div class="mx-auto max-w-4xl rounded-[2.5rem] border border-white/10 bg-white/5 p-8">
+        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+                <p class="text-sm font-bold uppercase tracking-[0.35em] text-amber-300">Dashboard Editor</p>
+                <h1 class="mt-4 font-['Playfair_Display'] text-4xl font-extrabold text-white">{{ page_title }}</h1>
+            </div>
+            <a href="{% url 'dashboard_category' section.key %}" class="rounded-full border border-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Back to {{ section.title }}</a>
+        </div>
+
+        <form method="post" class="mt-8 space-y-5">
+            {% csrf_token %}
+            {% for field in form %}
+            <div>
+                <label for="{{ field.id_for_label }}" class="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-stone-400">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                <p class="mt-2 text-sm text-red-300">{{ field.errors|join:", " }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="rounded-full bg-gradient-to-r from-amber-300 to-orange-500 px-6 py-3 text-sm font-extrabold uppercase tracking-[0.2em] text-stone-950">{{ submit_label }}</button>
+        </form>
+    </div>
+</section>
+{% endblock maincontent %}

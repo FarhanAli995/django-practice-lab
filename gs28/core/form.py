@@ -8,7 +8,6 @@ class StudentRegistration(forms.Form):
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'id': 'field_id',
                 'placeholder': 'Enter Your Name'
             }
         ),
@@ -18,14 +17,13 @@ class StudentRegistration(forms.Form):
         }
     )
 
-    Email = forms.EmailField(
+    email = forms.EmailField(
         max_length=50,
         required=True,
         initial='',
         widget=forms.EmailInput(
             attrs={
                 'class': 'form-control',
-                'id': 'field_id',
                 'placeholder': 'Enter Your Email Address'
             }
         ),
@@ -35,14 +33,14 @@ class StudentRegistration(forms.Form):
         }
     )
 
-    Father_name = forms.CharField(
+    father_name = forms.CharField(
+        label='Father name',
         max_length=50,
         required=True,
         initial='',
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
-                'id': 'field_id',
                 'placeholder': 'Enter Your Father Name'
             }
         ),
@@ -51,11 +49,3 @@ class StudentRegistration(forms.Form):
             'invalid': 'Invalid value'
         }
     )
-
-
-    
-
-
-    def clean(self):
-        cleaned_data = super().clean()
-        return cleaned_data

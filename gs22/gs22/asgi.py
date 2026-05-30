@@ -1,16 +1,1 @@
-"""
-ASGI config for gs22 project.
-
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/6.0/howto/deployment/asgi/
-"""
-
-import os
-
-from django.core.asgi import get_asgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gs22.settings')
-
-application = get_asgi_application()
+import os\n\nfrom channels.auth import AuthMiddlewareStack\nfrom channels.routing import ProtocolTypeRouter, URLRouter\nfrom django.core.asgi import get_asgi_application\n\nfrom apps.chat.routing import websocket_urlpatterns\n\nos.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gs22.settings')\n\napplication = get_asgi_application()\n\nwebsocket_application = ProtocolTypeRouter({\n    'websocket': AuthMiddlewareStack(URLRouter(websocket_urlpatterns)),\n})\n\n

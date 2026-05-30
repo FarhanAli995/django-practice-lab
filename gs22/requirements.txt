@@ -1,0 +1,11 @@
+Django>=4.2,<6.0
+djangorestframework>=3.14
+djangorestframework-simplejwt>=5.3
+psycopg2-binary>=2.9
+channels>=4.0
+channels-redis>=4.1
+redis>=5.0
+django-cors-headers>=4.3
+python-dotenv>=1.0
+
+\nDjango>=4.2\ndjangorestframework\ndjangorestframework-simplejwt\nchannels\nchannels-redis\nredis\npsycopg2-binary\ndjango-cors-headers\n

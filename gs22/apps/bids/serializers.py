@@ -1,0 +1,1 @@
+from rest_framework import serializers\nfrom apps.bids.models import Bid\n\n\nclass BidSerializer(serializers.ModelSerializer):\n    class Meta:\n        model = Bid\n        fields = ['id','job','proposal','amount','created_at']\n        read_only_fields = ['id','created_at']\n

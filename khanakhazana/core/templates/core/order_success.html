@@ -1,0 +1,54 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+<title>Khana Khazana | Order Confirmed</title>
+{% endblock title %}
+
+{% block maincontent %}
+<section class="px-6 pb-16 pt-32 md:px-10">
+    <div class="mx-auto max-w-5xl rounded-[2.5rem] border border-white/10 bg-white/5 p-8 md:p-10">
+        <p class="text-sm font-bold uppercase tracking-[0.35em] text-amber-300">Order Confirmed</p>
+        <h1 class="mt-5 font-['Playfair_Display'] text-5xl font-extrabold text-white">Your order has been placed.</h1>
+        <p class="mt-4 max-w-2xl text-lg leading-8 text-stone-300">
+            We’ve saved your order details and payment method. The kitchen team can now prepare and confirm dispatch from the dashboard.
+        </p>
+
+        <div class="mt-10 grid gap-6 md:grid-cols-3">
+            <div class="rounded-[1.75rem] border border-white/10 bg-stone-900/70 p-5">
+                <p class="text-xs uppercase tracking-[0.25em] text-stone-400">Order ID</p>
+                <p class="mt-2 text-2xl font-bold text-white">#{{ order.id }}</p>
+            </div>
+            <div class="rounded-[1.75rem] border border-white/10 bg-stone-900/70 p-5">
+                <p class="text-xs uppercase tracking-[0.25em] text-stone-400">Payment Method</p>
+                <p class="mt-2 text-2xl font-bold text-white">{{ order.get_payment_method_display }}</p>
+            </div>
+            <div class="rounded-[1.75rem] border border-white/10 bg-stone-900/70 p-5">
+                <p class="text-xs uppercase tracking-[0.25em] text-stone-400">Total</p>
+                <p class="mt-2 text-2xl font-bold text-amber-300">PKR {{ order.total }}</p>
+            </div>
+        </div>
+
+        <div class="mt-10 rounded-[2rem] border border-white/10 bg-stone-900/70 p-6">
+            <h2 class="font-['Playfair_Display'] text-3xl text-white">Items</h2>
+            <div class="mt-5 space-y-4">
+                {% for item in order.items.all %}
+                <div class="flex items-center justify-between border-b border-white/10 pb-4 text-sm text-stone-300 last:border-b-0">
+                    <div>
+                        <p class="font-semibold text-white">{{ item.dish_name }}</p>
+                        <p>{{ item.quantity }} x PKR {{ item.unit_price }}</p>
+                    </div>
+                    <span class="font-semibold">PKR {{ item.line_total }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+            <a href="{% url 'menu' %}" class="rounded-full border border-white/10 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Back to menu</a>
+            {% if request.user.is_authenticated and request.user.is_staff %}
+            <a href="{% url 'dashboard_home' %}" class="rounded-full bg-gradient-to-r from-amber-300 to-orange-500 px-6 py-3 text-sm font-extrabold uppercase tracking-[0.2em] text-stone-950">Open dashboard</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock maincontent %}

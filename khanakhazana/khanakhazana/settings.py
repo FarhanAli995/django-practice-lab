@@ -1,5 +1,6 @@
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -67,10 +68,14 @@ WSGI_APPLICATION = 'khanakhazana.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+DEFAULT_DB_DIR = Path(os.getenv('KHANAKHAZANA_DB_DIR', Path.home() / '.khanakhazana'))
+DEFAULT_DB_DIR.mkdir(parents=True, exist_ok=True)
+DEFAULT_DB_PATH = DEFAULT_DB_DIR / 'site.sqlite3'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': Path(os.getenv('KHANAKHAZANA_DB_PATH', DEFAULT_DB_PATH)),
     }
 }
 
@@ -110,3 +115,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
