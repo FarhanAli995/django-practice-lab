@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'enroll/main.css' %}">
+      
+<base target="_blank">
+</head>
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="glass-panel">
+
+        <!-- Login Section -->
+        <div class="auth-section active" id="loginSection">
+            <h1>Welcome Back</h1>
+            <p class="subtitle">Log in to your account to continue</p>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Email Address</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    {{ form.password }}
+                </div>
+                <button type="submit">Log in</button>
+            </form>
+
+            <div class="divider">or</div>
+
+            <button type="button" class="social-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.0001 11.9998V15.5498H17.8201C17.4351 17.5878 15.6591 19.1498 13.5001 19.1498C10.7401 19.1498 8.50012 16.9098 8.50012 14.1498C8.50012 11.3898 10.7401 9.14984 13.5001 9.14984C14.7731 9.14984 15.9321 9.63784 16.8001 10.4288L19.2971 7.93184C17.7811 6.47184 15.7481 5.54984 13.5001 5.54984C8.75312 5.54984 4.90012 9.40284 4.90012 14.1498C4.90012 18.8968 8.75312 22.7498 13.5001 22.7498C18.2471 22.7498 21.6001 18.8968 21.6001 14.1498C21.6001 13.4118 21.5031 12.6938 21.3251 11.9998H12.0001Z" fill="#fff"/>
+                </svg>
+                Log in with Google / Github
+            </button>
+
+            <p class="toggle-text">Don't have an account? <a onclick="showSignup()">Sign up</a></p>
+        </div>
+
+        <!-- Signup Section -->
+        <div class="auth-section hidden" id="signupSection">
+            <h1>Create Your Account</h1>
+            <p class="subtitle">Encouraging you to create your account.</p>
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+            </form>
+
+            <p class="toggle-text">Already have an account? <a onclick="showLogin()">Log in</a></p>
+        </div>
+
+    </div>
+
+    <script>
+        function showSignup() {
+            const loginSection = document.getElementById('loginSection');
+            const signupSection = document.getElementById('signupSection');
+
+            loginSection.classList.remove('active');
+            loginSection.classList.add('hidden');
+
+            signupSection.classList.remove('hidden');
+            signupSection.classList.add('active');
+        }
+
+        function showLogin() {
+            const loginSection = document.getElementById('loginSection');
+            const signupSection = document.getElementById('signupSection');
+
+            signupSection.classList.remove('active');
+            signupSection.classList.add('hidden');
+
+            loginSection.classList.remove('hidden');
+            loginSection.classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,19 +1,23 @@
 
-from pathlib import Path
-import os
-import mimetypes
 
-mimetypes.add_type("text/css", ".css", True)
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATIC_URL = '/static/'
+
+# List your app's static directory
+STATICFILES_DIRS = [
+    BASE_DIR / 'enroll' / 'static', 
+]
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_d5re4xiuut-69orx-pj8-)iztopxr47-=a)i6l6_*@*j9@d@6'
+SECRET_KEY = 'django-insecure-kpte=djhm%r-u(id*e(z3dh4gy7*46np9464byy$6633%8p^_+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -30,7 +34,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
+
+    # My apps
+    'enroll',
 ]
 
 MIDDLEWARE = [
@@ -43,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'khanakhazana.urls'
+ROOT_URLCONF = 'gs30.urls'
 
 TEMPLATES = [
     {
@@ -60,20 +66,16 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'khanakhazana.wsgi.application'
+WSGI_APPLICATION = 'gs30.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DEFAULT_DB_DIR = Path(os.getenv('KHANAKHAZANA_DB_DIR', Path.home() / '.khanakhazana'))
-DEFAULT_DB_DIR.mkdir(parents=True, exist_ok=True)
-DEFAULT_DB_PATH = DEFAULT_DB_DIR / 'site.sqlite3'
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': Path(os.getenv('KHANAKHAZANA_DB_PATH', DEFAULT_DB_PATH)),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -112,5 +114,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
-DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+STATIC_URL = 'static/' 
