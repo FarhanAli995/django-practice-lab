@@ -1,15 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sapphire Precision - Information Form</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        /* Styling for Django {{form.as_p}} output */
+        .django-form-container p {
+            margin-bottom: 1.25rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .django-form-container label {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        .django-form-container input:not([type="checkbox"]):not([type="radio"]), 
+        .django-form-container select, 
+        .django-form-container textarea {
+            width: 100%;
+            padding: 0.625rem 0.875rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-size: 0.9375rem;
+            line-height: 1.5;
+            color: #334155;
+            background-color: #ffffff;
+            transition: all 0.2s ease;
+        }
+        .django-form-container input:focus, 
+        .django-form-container select:focus, 
+        .django-form-container textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            ring: 2px;
+            ring-color: rgba(37, 99, 235, 0.2);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        .django-form-container .errorlist {
+            color: #dc2626;
+            font-size: 0.8125rem;
+            margin-top: 0.25rem;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .error-border {
+            border-color: #ef4444 !important;
+        }
+        .error-message {
+            color: #ef4444;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            font-weight: 500;
+        }
+        .loading-spinner {
+            display: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s linear infinite;
+            margin-right: 0.5rem;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .btn-loading .loading-spinner {
+            display: inline-block;
+        }
+        .btn-loading .btn-text {
+            opacity: 0.8;
+        }
+    </style>
 </head>
-<body>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+<body class="min-h-screen flex items-center justify-center p-4 md:p-8">
+<div class="w-full max-w-lg bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden">
+<!-- Header -->
+<div class="bg-slate-50 px-8 py-6 border-b border-slate-100">
+<div class="flex items-center gap-2 mb-2">
+<div class="bg-blue-600 p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-white text-xl leading-none">precision_manufacturing</span>
+</div>
+<span class="text-sm font-bold uppercase tracking-wider text-slate-500">Sapphire Precision</span>
+</div>
+<h1 class="text-2xl font-bold text-slate-800 leading-tight">Complete Your Profile</h1>
+<p class="text-slate-500 text-sm mt-1">Please provide the necessary details to proceed.</p>
+</div>
+<!-- Form Section -->
+<div class="px-8 py-8">
+<form action="" class="django-form-container" id="sapphireForm" method="post" novalidate="">
+                {% csrf_token %}
+                
+                <!-- This placeholder represents the Django-generated fields -->
+                {{form.as_p}}
+                
+                <!-- Mock fields for visualization if {{form.as_p}} is empty in static context -->
+<!-- <p><label for="id_name">Full Name</label><input type="text" name="name" id="id_name" placeholder="John Doe"></p>
+                <p><label for="id_email">Email Address</label><input type="email" name="email" id="id_email" placeholder="john@example.com"></p> -->
+<div class="mt-8">
+<button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-md shadow-blue-200 flex items-center justify-center group active:scale-[0.98]" id="submitBtn" type="submit">
+<span class="loading-spinner"></span>
+<span class="btn-text">Submit Information</span>
+<span class="material-symbols-outlined ml-2 text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<p class="text-center text-xs text-slate-400 mt-4">
+                        By submitting, you agree to our Terms of Service and Privacy Policy.
+                    </p>
+</div>
+</form>
+</div>
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('sapphireForm');
+            const submitBtn = document.getElementById('submitBtn');
+
+            form.addEventListener('submit', function(e) {
+                // Remove existing custom errors
+                document.querySelectorAll('.error-message').forEach(el => el.remove());
+                document.querySelectorAll('.error-border').forEach(el => el.classList.remove('error-border'));
+
+                let hasError = false;
+                const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+
+                // Basic validation for demonstration 
+                // Since Django handles this on server, we add simple client-side empty check
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        hasError = true;
+                        input.classList.add('error-border');
+                        
+                        const errorMsg = document.createElement('div');
+                        errorMsg.className = 'error-message';
+                        errorMsg.textContent = 'This field is required.';
+                        input.parentNode.appendChild(errorMsg);
+                    }
+                });
+
+                if (hasError) {
+                    e.preventDefault();
+                    return;
+                }
+
+                // Visual loading state
+                submitBtn.disabled = true;
+                submitBtn.classList.add('btn-loading');
+                submitBtn.classList.add('opacity-80');
+                submitBtn.classList.add('cursor-not-allowed');
+                
+                // Note: In a real Django environment, the page would redirect or refresh.
+                // This UI feedback persists until the request completes.
+            });
+
+            // Remove error styling on input
+            form.querySelectorAll('input, select, textarea').forEach(input => {
+                input.addEventListener('input', function() {
+                    this.classList.remove('error-border');
+                    const nextEl = this.nextElementSibling;
+                    if (nextEl && nextEl.classList.contains('error-message')) {
+                        nextEl.remove();
+                    }
+                });
+            });
+        });
+    </script>
+</body></html>
