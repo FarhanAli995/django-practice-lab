@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful - AKHS Rahimabad</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FBBF24; /* Yellow */
+            --primary-hover: #F59E0B;
+            --bg: #FEF9F0; /* Light beige */
+            --surface: #FFFFFF;
+            --text-dark: #1E1B14;
+            --text-light: #6B7280;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .header {
+            width: 100%;
+            padding: 1.25rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #78350F;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            box-sizing: border-box;
+            background: transparent;
+            z-index: 10;
+        }
+        .header-left i { margin-right: 0.5rem; }
+        .header-right i { margin-left: 1rem; color: #4B5563; font-size: 1.2rem; cursor: pointer; transition: color 0.3s; }
+        .header-right i:hover { color: var(--text-dark); }
+
+        .main-container {
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto 5rem auto;
+            background: transparent;
+            text-align: center;
+            position: relative;
+        }
+
+        .banner {
+            background: linear-gradient(to bottom, #E0E7FF, #FFFFFF);
+            height: 180px;
+            border-radius: 0 0 20px 20px;
+            position: relative;
+            margin-bottom: 4rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .success-icon-wrapper {
+            position: absolute;
+            bottom: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 90px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 0 10px #FEF9F0; /* blends with body bg */
+            animation: bounceIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+        }
+        .success-icon-wrapper i {
+            font-size: 2.5rem;
+            color: #78350F; /* Match brand */
+            animation: checkmark 0.5s ease-out 0.8s both;
+        }
+
+        h1 {
+            color: #78350F;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 0.6s ease-out 0.4s both;
+        }
+        .welcome-text {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 0 2rem;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.6s ease-out 0.6s both;
+        }
+
+        .details-card {
+            background-color: #F8EFE0;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 0 1.5rem 2.5rem 1.5rem;
+            text-align: left;
+            animation: fadeInUp 0.6s ease-out 0.8s both;
+            position: relative;
+        }
+        .details-card h3 {
+            margin: 0 0 1.2rem 0;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #4B5563;
+        }
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        .data-item:last-child { margin-bottom: 0; }
+        .label { color: #6B7280; }
+        .value { font-weight: 700; color: #1E1B14; text-align: right; word-break: break-all; margin-left: 10px;}
+
+        .btn {
+            display: block;
+            width: calc(100% - 3rem);
+            margin: 0 auto 1rem auto;
+            padding: 1.1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out 1s both;
+            box-sizing: border-box;
+            font-size: 1.05rem;
+        }
+        .btn-primary {
+            background-color: var(--primary);
+            color: #78350F;
+            box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background-color: #FFFFFF;
+            color: #4B5563;
+            border: 1px solid #D1D5DB;
+        }
+        .btn-outline:hover {
+            background-color: #F3F4F6;
+        }
+        .btn i { margin-right: 0.5rem; }
+
+        .help-text {
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            animation: fadeIn 1s ease-out 1.2s both;
+        }
+        .help-text i { margin-right: 0.3rem; }
+
+        /* Confetti Canvas */
+        #confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* Bottom Nav (Decorative) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #FFF;
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            padding: 0.8rem 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            animation: slideUp 0.6s ease-out 1.4s both;
+        }
+        .nav-item {
+            text-align: center;
+            color: #6B7280;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-item i {
+            display: block;
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+        .nav-item.active {
+            color: var(--primary-hover);
+        }
+
+        /* Animations */
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: translateX(-50%) scale(0.3); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+            70% { transform: translateX(-50%) scale(0.9); }
+            100% { opacity: 1; transform: translateX(-50%) scale(1); }
+        }
+        @keyframes checkmark { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+    </style>
+</head>
+<body>
+    <canvas id="confetti"></canvas>
+
+    <div class="header">
+        <div class="header-left"><i class="fa-solid fa-graduation-cap"></i> AKHS Rahimabad</div>
+        <div class="header-right"><i class="fa-regular fa-bell"></i> <i class="fa-regular fa-user-circle"></i></div>
+    </div>
+
+    <div class="main-container">
+        <div class="banner">
+            <div class="success-icon-wrapper">
+                <i class="fa-solid fa-check"></i>
+            </div>
+        </div>
+
+        <h1>Registration Successful!</h1>
+        <p class="welcome-text">Welcome to AKHS Rahimabad. Your academic journey starts here.</p>
+
+        <div class="details-card">
+            <h3>REGISTRATION DETAILS</h3>
+            <div class="data-item">
+                <span class="label">Name</span>
+                <span class="value">{{ form.name.value }}</span>
+            </div>
+            <div class="data-item">
+                <span class="label">Email</span>
+                <span class="value">{{ form.email.value }}</span>
+            </div>
+        </div>
+
+        <a href="#" class="btn btn-primary"><i class="fa-solid fa-table-cells-large"></i> Go to Dashboard</a>
+        <a href="/" class="btn btn-outline"><i class="fa-regular fa-calendar-days"></i> View Class Schedule</a>
+
+        <div class="help-text">
+            <i class="fa-solid fa-circle-info"></i> Need help? Contact admissions at support@akhsr.edu.pk
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active"><i class="fa-solid fa-user-plus"></i>Register</a>
+        <a href="#" class="nav-item"><i class="fa-solid fa-book"></i>Courses</a>
+        <a href="#" class="nav-item"><i class="fa-regular fa-user"></i>Profile</a>
+    </div>
+
+    <script>
+        // Confetti Animation Effect
+        window.onload = function() {
+            const canvas = document.getElementById('confetti');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const pieces = [];
+            const colors = ['#FBBF24', '#78350F', '#60A5FA', '#34D399']; // Yellow, Brown, Blue, Green accents
+
+            for (let i = 0; i < 80; i++) {
+                pieces.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height - canvas.height,
+                    size: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    speed: Math.random() * 3 + 2,
+                    angle: Math.random() * 360,
+                    spin: Math.random() * 0.2 - 0.1
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let active = false;
+
+                pieces.forEach(p => {
+                    p.y += p.speed;
+                    p.angle += p.spin;
+
+                    if (p.y < canvas.height) active = true;
+
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.angle);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+                    ctx.restore();
+                });
+
+                if (active) requestAnimationFrame(animate);
+            }
+            animate();
+            
+            // Handle window resize for canvas
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        };
+    </script>
+</body>
+</html>
