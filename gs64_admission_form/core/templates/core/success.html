@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Submitted</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --primary-yellow: #FFD700;
+            --accent-yellow: #F59E0B;
+            --dark-gray: #1F2937;
+            --bg-color: #111827;
+            --text-light: #F3F4F6;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: radial-gradient(circle at center, #1F2937 0%, #000000 100%);
+            overflow: hidden;
+        }
+
+        .success-card {
+            background: rgba(31, 41, 55, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(255, 215, 0, 0.2);
+            transform: scale(0.9);
+            animation: zoomIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes zoomIn {
+            to { transform: scale(1); }
+        }
+
+        .icon-container {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--primary-yellow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 30px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            animation: pulseIcon 2s infinite;
+        }
+
+        @keyframes pulseIcon {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(255, 215, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+
+        .icon-container svg {
+            width: 50px;
+            height: 50px;
+            color: var(--dark-gray);
+            stroke-width: 3;
+            animation: checkmark 1s ease-in-out forwards;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+        }
+
+        @keyframes checkmark {
+            to { stroke-dashoffset: 0; }
+        }
+
+        h1 {
+            color: var(--primary-yellow);
+            margin-bottom: 15px;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p {
+            color: #D1D5DB;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn-home {
+            display: inline-block;
+            background: transparent;
+            color: var(--primary-yellow);
+            border: 2px solid var(--primary-yellow);
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-home:hover {
+            background: var(--primary-yellow);
+            color: #000;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Confetti particles */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-yellow);
+            opacity: 0;
+            z-index: 1;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="success-card">
+        <div class="icon-container">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+            </svg>
+        </div>
+        <h1 class="animate__animated animate__fadeInUp animate__delay-1s">Success!</h1>
+        <p class="animate__animated animate__fadeInUp animate__delay-1s">Your admission application has been submitted successfully. We will review it and get back to you soon.</p>
+        <a href="{% url 'admission_application' %}" class="btn-home animate__animated animate__fadeInUp animate__delay-2s">Submit Another</a>
+    </div>
+
+    <script>
+        // Confetti effect
+        const colors = ['#FFD700', '#F59E0B', '#F3F4F6', '#9CA3AF'];
+        for (let i = 0; i < 100; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            
+            // Random styling
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Different shapes
+            if (Math.random() > 0.5) {
+                confetti.style.borderRadius = '50%';
+            }
+            
+            // Random animation values
+            confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            confetti.style.animationDelay = (Math.random() * 2) + 's';
+            confetti.style.animationName = 'confettiFall';
+            confetti.style.animationIterationCount = 'infinite';
+            confetti.style.animationTimingFunction = 'linear';
+            
+            document.body.appendChild(confetti);
+        }
+    </script>
+</body>
+</html>
