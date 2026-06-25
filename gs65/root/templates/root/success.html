@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Application Submitted | AETHERIS PORTAL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#705d00",
+                    "secondary": "#ffb95f",
+                    "surface-dim": "#0d141d",
+                    "on-secondary-fixed": "#2a1700",
+                    "error-container": "#93000a",
+                    "on-secondary-container": "#5b3800",
+                    "surface": "#0d141d",
+                    "on-surface": "#dce3f0",
+                    "surface-container-highest": "#2e353f",
+                    "on-primary-fixed-variant": "#544600",
+                    "surface-tint": "#e9c400",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "background": "#0d141d",
+                    "primary-fixed": "#ffe16d",
+                    "on-primary-fixed": "#221b00",
+                    "primary-fixed-dim": "#e9c400",
+                    "inverse-on-surface": "#2a313b",
+                    "on-tertiary-fixed": "#002022",
+                    "surface-container-low": "#151c25",
+                    "surface-container-high": "#232a34",
+                    "on-secondary": "#472a00",
+                    "on-background": "#dce3f0",
+                    "on-surface-variant": "#d0c6ab",
+                    "on-primary": "#3a3000",
+                    "surface-variant": "#2e353f",
+                    "on-tertiary-fixed-variant": "#004f54",
+                    "surface-bright": "#333a44",
+                    "on-tertiary": "#00363a",
+                    "tertiary-fixed": "#79f5ff",
+                    "surface-container": "#192029",
+                    "error": "#ffb4ab",
+                    "on-tertiary-container": "#006a70",
+                    "primary": "#fff6df",
+                    "on-error-container": "#ffdad6",
+                    "tertiary": "#defcff",
+                    "on-error": "#690005",
+                    "secondary-container": "#ee9800",
+                    "primary-container": "#ffd700",
+                    "secondary-fixed": "#ffddb8",
+                    "outline-variant": "#4d4732",
+                    "tertiary-fixed-dim": "#00dbe8",
+                    "surface-container-lowest": "#080f17",
+                    "secondary-fixed-dim": "#ffb95f",
+                    "tertiary-container": "#00f1ff",
+                    "on-primary-container": "#705e00",
+                    "outline": "#999077",
+                    "inverse-surface": "#dce3f0"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "sm": "12px",
+                    "md": "24px",
+                    "gutter": "24px",
+                    "base": "8px",
+                    "xl": "80px",
+                    "lg": "48px",
+                    "container-max": "1200px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Outfit"],
+                    "body-sm": ["Outfit"],
+                    "headline-lg": ["Outfit"],
+                    "display-lg": ["Outfit"],
+                    "label-bold": ["Outfit"],
+                    "title-md": ["Outfit"],
+                    "headline-lg-mobile": ["Outfit"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-bold": ["12px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "title-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #050505;
+            overflow-x: hidden;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .cinematic-entrance {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: cinematicFadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes cinematicFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
+        .gold-glow {
+            box-shadow: 0 0 20px rgba(233, 196, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .gold-glow:active {
+            box-shadow: 0 0 5px rgba(233, 196, 0, 0.2);
+            transform: scale(0.98);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .bg-radial-gradient {
+            background: radial-gradient(circle at center, #151c25 0%, #050505 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col text-on-surface selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full bg-surface/30 backdrop-blur-md border-b border-white/5 z-50">
+<div class="flex justify-between items-center px-gutter py-md w-full max-w-container-max mx-auto">
+<div class="text-title-md font-title-md font-bold tracking-tighter text-primary-fixed uppercase">
+                AETHERIS PORTAL
+            </div>
+<div class="flex items-center gap-sm">
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-300">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow relative flex items-center justify-center pt-xl px-gutter overflow-hidden bg-radial-gradient">
+<!-- Background Scene: 3D Particles / Ambient Motion -->
+<!-- Note: This could be an additional shader for atmosphere as requested -->
+<div class="absolute inset-0 z-0 pointer-events-none opacity-40">
+<!-- STITCH_THREEJS_START:ANIMATION_2 class="" -->
+<div class="" style="display:block;width:100%;height:100%;min-height:200px;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_2" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_2');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || window.innerHeight;
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+// Floating 3D Trophy / Success Shape
+const group = new THREE.Group();
+scene.add(group);
+
+const geometry = new THREE.IcosahedronGeometry(1.5, 0);
+const material = new THREE.MeshPhongMaterial({
+    color: 0xFFD700,
+    wireframe: true,
+    emissive: 0x443300,
+    shininess: 100
+});
+
+const mesh = new THREE.Mesh(geometry, material);
+group.add(mesh);
+
+// Core Glow
+const coreGeom = new THREE.SphereGeometry(0.8, 32, 32);
+const coreMat = new THREE.MeshPhongMaterial({
+    color: 0xFFD700,
+    emissive: 0xFFD700,
+    transparent: true,
+    opacity: 0.8
+});
+const core = new THREE.Mesh(coreGeom, coreMat);
+group.add(core);
+
+const light = new THREE.PointLight(0xFFD700, 2, 10);
+light.position.set(2, 2, 2);
+scene.add(light);
+scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+
+camera.position.z = 5;
+
+function animate() {
+    requestAnimationFrame(animate);
+    group.rotation.y += 0.01;
+    group.rotation.z += 0.005;
+    core.scale.set(
+        1 + Math.sin(Date.now() * 0.002) * 0.1,
+        1 + Math.sin(Date.now() * 0.002) * 0.1,
+        1 + Math.sin(Date.now() * 0.002) * 0.1
+    );
+    renderer.render(scene, camera);
+}
+
+window.addEventListener('resize', () => {
+    const w = container.clientWidth || window.innerWidth;
+    const h = container.clientHeight || window.innerHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+});
+
+animate();
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_2 -->
+</div>
+<!-- Success Content -->
+<div class="relative z-10 w-full max-w-lg mx-auto">
+<!-- Floating Trophy Container -->
+<div class="h-64 md:h-80 w-full mb-md cinematic-entrance">
+<!-- STITCH_THREEJS_START:ANIMATION_2 class="w-full h-full" -->
+<div class="w-full h-full" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_2" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_2');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || window.innerHeight;
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+// Floating 3D Trophy / Success Shape
+const group = new THREE.Group();
+scene.add(group);
+
+const geometry = new THREE.IcosahedronGeometry(1.5, 0);
+const material = new THREE.MeshPhongMaterial({
+    color: 0xFFD700,
+    wireframe: true,
+    emissive: 0x443300,
+    shininess: 100
+});
+
+const mesh = new THREE.Mesh(geometry, material);
+group.add(mesh);
+
+// Core Glow
+const coreGeom = new THREE.SphereGeometry(0.8, 32, 32);
+const coreMat = new THREE.MeshPhongMaterial({
+    color: 0xFFD700,
+    emissive: 0xFFD700,
+    transparent: true,
+    opacity: 0.8
+});
+const core = new THREE.Mesh(coreGeom, coreMat);
+group.add(core);
+
+const light = new THREE.PointLight(0xFFD700, 2, 10);
+light.position.set(2, 2, 2);
+scene.add(light);
+scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+
+camera.position.z = 5;
+
+function animate() {
+    requestAnimationFrame(animate);
+    group.rotation.y += 0.01;
+    group.rotation.z += 0.005;
+    core.scale.set(
+        1 + Math.sin(Date.now() * 0.002) * 0.1,
+        1 + Math.sin(Date.now() * 0.002) * 0.1,
+        1 + Math.sin(Date.now() * 0.002) * 0.1
+    );
+    renderer.render(scene, camera);
+}
+
+window.addEventListener('resize', () => {
+    const w = container.clientWidth || window.innerWidth;
+    const h = container.clientHeight || window.innerHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+});
+
+animate();
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_2 -->
+</div>
+<!-- Glass Card -->
+<div class="glass-card rounded-xl p-lg text-center shadow-2xl cinematic-entrance delay-100">
+<div class="mb-sm">
+<span class="material-symbols-outlined text-primary-fixed text-5xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary-fixed mb-md tracking-tight cinematic-entrance delay-200">
+                    Success!
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-lg leading-relaxed max-w-md mx-auto cinematic-entrance delay-300">
+                    Your admission application has been submitted successfully. We will review it and get back to you soon.
+                </p>
+<!-- Action Button -->
+<div class="flex flex-col items-center gap-md cinematic-entrance delay-300">
+<a class="inline-flex items-center justify-center bg-primary-fixed text-on-primary-fixed font-label-bold text-label-bold px-lg py-sm rounded-full gold-glow uppercase tracking-widest hover:brightness-110 transition-all duration-300 w-full md:w-auto" href="{% url 'admission_application' %}">
+                        Submit Another
+                    </a>
+<button class="text-outline hover:text-primary-fixed transition-colors duration-300 font-label-bold text-label-bold flex items-center gap-xs">
+<span class="material-symbols-outlined text-sm">download</span>
+                        DOWNLOAD RECEIPT
+                    </button>
+</div>
+</div>
+<!-- Secondary Info / Steps (Subtle) -->
+<div class="mt-lg flex justify-center gap-lg cinematic-entrance delay-300 opacity-60">
+<div class="flex flex-col items-center">
+<div class="w-1 h-8 bg-primary-fixed rounded-full mb-xs"></div>
+<span class="font-label-bold text-[10px] uppercase tracking-tighter text-outline">Submission</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-1 h-8 bg-surface-container-highest rounded-full mb-xs"></div>
+<span class="font-label-bold text-[10px] uppercase tracking-tighter text-outline">Review</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-1 h-8 bg-surface-container-highest rounded-full mb-xs"></div>
+<span class="font-label-bold text-[10px] uppercase tracking-tighter text-outline">Decision</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-lg border-t border-white/5 z-20">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter w-full max-w-container-max mx-auto mt-auto opacity-80">
+<span class="font-label-bold text-label-bold text-outline mb-md md:mb-0">
+                © 2154 AETHERIS INSTITUTION. ALL RIGHTS RESERVED.
+            </span>
+<div class="flex gap-lg">
+<a class="font-label-bold text-label-bold text-outline hover:text-primary-fixed-dim transition-opacity" href="#">Privacy Protocol</a>
+<a class="font-label-bold text-label-bold text-outline hover:text-primary-fixed-dim transition-opacity" href="#">Terms of Access</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Micro-interaction: Mouse tracking for light reflection on the glass card
+        const card = document.querySelector('.glass-card');
+        document.addEventListener('mousemove', (e) => {
+            if (!card) return;
+            const { clientX, clientY } = e;
+            const { left, top, width, height } = card.getBoundingClientRect();
+            const x = ((clientX - left) / width) * 100;
+            const y = ((clientY - top) / height) * 100;
+            
+            card.style.setProperty('--mouse-x', `${x}%`);
+            card.style.setProperty('--mouse-y', `${y}%`);
+            
+            // Subtle tilt effect
+            const rotateX = (clientY - (top + height / 2)) / 50;
+            const rotateY = -(clientX - (left + width / 2)) / 50;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        // Reset card on mouse leave
+        document.addEventListener('mouseleave', () => {
+            if (card) {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+            }
+        });
+    </script>
+</body></html>
