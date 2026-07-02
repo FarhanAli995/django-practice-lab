@@ -6,6 +6,8 @@ from django.contrib import admin
 urlpatterns = [
     path('', views.home_view, name='home'), # You'll need to create a home_view in views.py
     path('students/<int:my_id>/', views.stu_details, name='details'),   
-]
+    path('students/<int:my_id>/<int:my_sub_id>/', views.stu_sub_details, name='sub_details'),  
+] 
+
 
  

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>sub students page</h1>
+    <p>name {{ name }}</p>
+    <p>year {{ info }}</p>
+    <p>subjects {{ subjects }}</p>
+
+    <ul>
+        <li><button><a href="{% url 'home' %}">go to home page</a></button></li>
+        <li><button><a href="{% url 'details' my_id %}">Go to details page </a></button></li>
+    </ul>
+
+
+</body>
+</html>
