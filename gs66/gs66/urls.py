@@ -1,5 +1,4 @@
 
-# Root URL config — includes app-level routes
 from django.contrib import admin
 from django.urls import path, include
 
