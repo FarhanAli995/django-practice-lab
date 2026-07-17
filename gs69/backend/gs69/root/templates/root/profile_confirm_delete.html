@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Profile{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="table-container text-center">
+                <div class="mb-4">
+                    <i class="fas fa-exclamation-triangle text-danger" style="font-size: 64px;"></i>
+                </div>
+                
+                <h3>Confirm Delete</h3>
+                <p class="text-muted">
+                    Are you sure you want to delete the profile for 
+                    <strong>{{ profile.name }}</strong>?
+                </p>
+                <p class="text-danger small">
+                    <i class="fas fa-info-circle"></i> This action cannot be undone.
+                </p>
+                
+                <form method="post" class="mt-4">
+                    {% csrf_token %}
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="{% url 'profile_detail' profile.pk %}" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Cancel
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Yes, Delete
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,585 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="h2"><i class="fas fa-chart-pie text-primary"></i> Dashboard</h1>
+            <p class="text-muted">Welcome to your user management dashboard</p>
+        </div>
+    </div>
+    
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="stat-number">{{ total_profiles }}</div>
+                        <div class="stat-label">Total Profiles</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="stat-number text-success">{{ active_profiles }}</div>
+                        <div class="stat-label">Active Profiles</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-user-check text-success"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="stat-number text-danger">{{ inactive_profiles }}</div>
+                        <div class="stat-label">Inactive Profiles</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-user-slash text-danger"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="stat-number text-info">{{ education_stats|length }}</div>
+                        <div class="stat-label">Education Types</div>
+                    </div>
+                    <div class="stat-icon">
+                        <i class="fas fa-graduation-cap text-info"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Charts Row -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="table-container">
+                <h5 class="mb-3"><i class="fas fa-graduation-cap"></i> Education Distribution</h5>
+                <canvas id="educationChart" height="200"></canvas>
+            </div>
+        </div>
+        
+        <div class="col-md-6 animate__animated animate__fadeInRight animate__delay-2s">
+            <div class="table-container hover-lift bar-chart-container">
+                <h5 class="mb-3"><i class="fas fa-chart-bar"></i> Status Overview</h5>
+                <canvas id="statusChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Profiles -->
+    <div class="row">
+        <div class="col-12">
+            <div class="table-container">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5><i class="fas fa-clock"></i> Recent Profiles</h5>
+                    <a href="{% url 'profile_list' %}" class="btn btn-primary btn-sm">
+                        View All <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                {% if recent_profiles %}
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Mobile</th>
+                                <th>Profession</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for profile in recent_profiles %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="profile-avatar me-2">{{ profile.name|first|upper }}</div>
+                                        {{ profile.name }}
+                                    </div>
+                                </td>
+                                <td>{{ profile.email|default:"-" }}</td>
+                                <td>{{ profile.mobile_number }}</td>
+                                <td>{{ profile.profession|default:"-" }}</td>
+                                <td>
+                                    {% if profile.is_active %}
+                                        <span class="badge bg-success badge-active">Active</span>
+                                    {% else %}
+                                        <span class="badge bg-danger badge-inactive">Inactive</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'profile_detail' profile.pk %}" class="btn btn-sm btn-outline-info">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{% url 'profile_update' profile.pk %}" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="text-muted text-center py-3">
+                    <i class="fas fa-inbox"></i> No profiles created yet.
+                    <a href="{% url 'profile_create' %}">Create your first profile</a>
+                </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Education Distribution Chart with Hover Effect
+    const ctx1 = document.getElementById('educationChart').getContext('2d');
+    const educationData = {
+        {% for stat in education_stats %}
+            '{{ stat.education }}': {{ stat.count }},
+        {% endfor %}
+    };
+    
+    const labels = Object.keys(educationData);
+    const dataValues = Object.values(educationData);
+    
+    // Color palette
+    const colors = [
+        '#667eea', '#764ba2', '#f093fb', '#4facfe', '#43e97b', '#fa709a',
+        '#f093fb', '#4facfe', '#43e97b', '#fa709a', '#f9d976', '#f39c12'
+    ];
+    
+    // Get random color or use default
+    const backgroundColors = labels.map((_, index) => colors[index % colors.length]);
+    
+    const educationChart = new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: dataValues,
+                backgroundColor: backgroundColors,
+                borderWidth: 2,
+                borderColor: '#ffffff',
+                hoverOffset: 15,
+                hoverBorderWidth: 3,
+                hoverBorderColor: '#fff',
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            cutout: '70%',
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 15,
+                        usePointStyle: true,
+                        pointStyle: 'circle',
+                        font: {
+                            size: 12,
+                            weight: 'bold'
+                        },
+                        color: '#333'
+                    },
+                    onClick: function(e, legendItem, legend) {
+                        // Handle legend click - show only that section
+                        const index = legendItem.index;
+                        const chart = this.chart;
+                        const meta = chart.getDatasetMeta(0);
+                        
+                        // Reset all segments to original colors
+                        const originalColors = backgroundColors;
+                        
+                        if (chart._lastSelected === index) {
+                            // Deselect - show all
+                            chart.data.datasets[0].backgroundColor = originalColors;
+                            chart._lastSelected = null;
+                        } else {
+                            // Select - show only this segment in color
+                            const newColors = originalColors.map((color, i) => 
+                                i === index ? color : '#e0e0e0'
+                            );
+                            chart.data.datasets[0].backgroundColor = newColors;
+                            chart._lastSelected = index;
+                        }
+                        chart.update();
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    cornerRadius: 10,
+                    padding: 12,
+                    callbacks: {
+                        label: function(context) {
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = ((context.parsed / total) * 100).toFixed(1);
+                            return `${context.label}: ${context.parsed} (${percentage}%)`;
+                        }
+                    }
+                }
+            },
+            animation: {
+                animateRotate: true,
+                animateScale: true,
+                duration: 1000
+            },
+            onHover: function(event, chartElement) {
+                const chart = this;
+                const dataset = chart.data.datasets[0];
+                const originalColors = backgroundColors;
+                
+                if (chartElement && chartElement.length > 0) {
+                    // Hovering over a segment
+                    const index = chartElement[0].index;
+                    const newColors = originalColors.map((color, i) => 
+                        i === index ? color : '#e0e0e0'
+                    );
+                    dataset.backgroundColor = newColors;
+                    chart._lastHovered = index;
+                    chart.update();
+                } else {
+                    // Not hovering over any segment
+                    if (!chart._lastSelected || chart._lastSelected === null) {
+                        // If nothing is selected, show all colors
+                        dataset.backgroundColor = originalColors;
+                    } else {
+                        // Keep selected highlight
+                        const newColors = originalColors.map((color, i) => 
+                            i === chart._lastSelected ? color : '#e0e0e0'
+                        );
+                        dataset.backgroundColor = newColors;
+                    }
+                    chart.update();
+                }
+            },
+            onClick: function(event, chartElement) {
+                const chart = this;
+                const dataset = chart.data.datasets[0];
+                const originalColors = backgroundColors;
+                
+                if (chartElement && chartElement.length > 0) {
+                    const index = chartElement[0].index;
+                    
+                    if (chart._lastSelected === index) {
+                        // Deselect
+                        dataset.backgroundColor = originalColors;
+                        chart._lastSelected = null;
+                    } else {
+                        // Select this segment
+                        const newColors = originalColors.map((color, i) => 
+                            i === index ? color : '#e0e0e0'
+                        );
+                        dataset.backgroundColor = newColors;
+                        chart._lastSelected = index;
+                    }
+                    chart.update();
+                }
+            }
+        }
+    });
+    
+    // Status Chart with Advanced Hover Effects
+    const ctx2 = document.getElementById('statusChart').getContext('2d');
+    
+    // Original data
+    const activeData = {{ active_profiles }};
+    const inactiveData = {{ inactive_profiles }};
+    const maxData = Math.max(activeData, inactiveData, 1);
+    
+    const statusChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Active', 'Inactive'],
+            datasets: [{
+                label: 'Profiles',
+                data: [activeData, inactiveData],
+                backgroundColor: ['#43e97b', '#fa709a'],
+                borderColor: ['#2dbf6e', '#e85a7a'],
+                borderWidth: 2,
+                borderRadius: 8,
+                barPercentage: 0.6,
+                // Store original values
+                _originalData: [activeData, inactiveData],
+                _originalColors: ['#43e97b', '#fa709a'],
+                _grayColors: ['#d3d3d3', '#d3d3d3'],
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    cornerRadius: 10,
+                    padding: 12,
+                    displayColors: false,
+                    callbacks: {
+                        label: function(context) {
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = total > 0 ? ((context.parsed / total) * 100).toFixed(1) : 0;
+                            return `${context.label}: ${context.parsed} (${percentage}%)`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: maxData + 2,
+                    ticks: {
+                        stepSize: 1,
+                        font: {
+                            size: 12
+                        },
+                        color: '#666'
+                    },
+                    grid: {
+                        color: 'rgba(0,0,0,0.08)',
+                        drawBorder: false
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            size: 14,
+                            weight: 'bold'
+                        },
+                        color: '#333'
+                    }
+                }
+            },
+            animation: {
+                duration: 600,
+                easing: 'easeOutQuart'
+            },
+            onHover: function(event, chartElement) {
+                const chart = this;
+                const dataset = chart.data.datasets[0];
+                
+                if (chartElement && chartElement.length > 0) {
+                    // Hovering on a bar
+                    const index = chartElement[0].index;
+                    const originalColors = dataset._originalColors;
+                    const grayColors = dataset._grayColors;
+                    
+                    // 1. Make hovered bar shiny/glowing, others gray
+                    const newColors = originalColors.map((color, i) => 
+                        i === index ? color : grayColors[i]
+                    );
+                    dataset.backgroundColor = newColors;
+                    
+                    // 2. Animate bar upward (increase height)
+                    const originalData = dataset._originalData;
+                    const hoverData = originalData.map((value, i) => {
+                        if (i === index) {
+                            // Increase the hovered bar by 20% (but at least 0.5)
+                            const increase = Math.max(value * 0.2, 0.5);
+                            return value + increase;
+                        }
+                        return value;
+                    });
+                    
+                    // Apply hover data with animation
+                    chart.data.datasets[0].data = hoverData;
+                    chart.update();
+                    
+                    // Change cursor
+                    event.native.target.style.cursor = 'pointer';
+                    
+                    // Store hovered index
+                    chart._hoveredIndex = index;
+                } else {
+                    // Not hovering on any bar
+                    if (!chart._selectedIndex && chart._selectedIndex !== 0) {
+                        // Reset to original colors and data
+                        dataset.backgroundColor = dataset._originalColors;
+                        chart.data.datasets[0].data = dataset._originalData;
+                        chart.update();
+                    } else {
+                        // Keep selected bar highlighted
+                        const selectedIndex = chart._selectedIndex;
+                        const originalColors = dataset._originalColors;
+                        const grayColors = dataset._grayColors;
+                        
+                        const newColors = originalColors.map((color, i) => 
+                            i === selectedIndex ? color : grayColors[i]
+                        );
+                        dataset.backgroundColor = newColors;
+                        
+                        const originalData = dataset._originalData;
+                        const selectedData = originalData.map((value, i) => {
+                            if (i === selectedIndex) {
+                                const increase = Math.max(value * 0.2, 0.5);
+                                return value + increase;
+                            }
+                            return value;
+                        });
+                        chart.data.datasets[0].data = selectedData;
+                        chart.update();
+                    }
+                    
+                    event.native.target.style.cursor = 'default';
+                }
+            },
+            onClick: function(event, chartElement) {
+                const chart = this;
+                const dataset = chart.data.datasets[0];
+                
+                if (chartElement && chartElement.length > 0) {
+                    const index = chartElement[0].index;
+                    
+                    if (chart._selectedIndex === index) {
+                        // Deselect
+                        chart._selectedIndex = null;
+                        dataset.backgroundColor = dataset._originalColors;
+                        chart.data.datasets[0].data = dataset._originalData;
+                        chart.update();
+                    } else {
+                        // Select this bar
+                        chart._selectedIndex = index;
+                        const originalColors = dataset._originalColors;
+                        const grayColors = dataset._grayColors;
+                        
+                        const newColors = originalColors.map((color, i) => 
+                            i === index ? color : grayColors[i]
+                        );
+                        dataset.backgroundColor = newColors;
+                        
+                        const originalData = dataset._originalData;
+                        const selectedData = originalData.map((value, i) => {
+                            if (i === index) {
+                                const increase = Math.max(value * 0.2, 0.5);
+                                return value + increase;
+                            }
+                            return value;
+                        });
+                        chart.data.datasets[0].data = selectedData;
+                        chart.update();
+                    }
+                }
+            }
+        }
+    });
+    
+    // Add shine/glow effect using CSS overlay
+    const style = document.createElement('style');
+    style.textContent = `
+        .status-chart-container {
+            position: relative;
+        }
+        
+        .status-chart-container canvas {
+            transition: filter 0.3s ease;
+        }
+        
+        .status-chart-container:hover canvas {
+            filter: drop-shadow(0 0 20px rgba(67, 233, 123, 0.3));
+        }
+        
+        /* Shine animation for hovered bar */
+        @keyframes shineGlow {
+            0% {
+                filter: brightness(1) drop-shadow(0 0 5px rgba(255,255,255,0));
+            }
+            50% {
+                filter: brightness(1.3) drop-shadow(0 0 30px rgba(255,255,255,0.6));
+            }
+            100% {
+                filter: brightness(1) drop-shadow(0 0 5px rgba(255,255,255,0));
+            }
+        }
+        
+        .bar-hovered {
+            animation: shineGlow 0.8s ease-in-out infinite;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Add shine effect on hover
+    document.getElementById('statusChart').addEventListener('mouseenter', function(e) {
+        if (statusChart._hoveredIndex !== undefined) {
+            this.classList.add('bar-hovered');
+        }
+    });
+    
+    document.getElementById('statusChart').addEventListener('mouseleave', function() {
+        this.classList.remove('bar-hovered');
+        // Reset to original state if nothing selected
+        if (statusChart._selectedIndex === null || statusChart._selectedIndex === undefined) {
+            const dataset = statusChart.data.datasets[0];
+            dataset.backgroundColor = dataset._originalColors;
+            statusChart.data.datasets[0].data = dataset._originalData;
+            statusChart.update();
+        }
+    });
+    
+    // Add custom CSS for bar glow
+    const glowStyle = document.createElement('style');
+    glowStyle.textContent = `
+        /* Glowing effect for active bar */
+        .status-chart-container .bar-glow {
+            animation: glowPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 5px rgba(67, 233, 123, 0.2));
+            }
+            50% {
+                filter: drop-shadow(0 0 25px rgba(67, 233, 123, 0.8)) 
+                        drop-shadow(0 0 50px rgba(67, 233, 123, 0.4));
+            }
+        }
+        
+        /* Hover glow for inactive bars when active is selected */
+        .status-chart-container .gray-bar {
+            filter: grayscale(1) brightness(0.9);
+            transition: all 0.3s ease;
+        }
+        
+        .status-chart-container .gray-bar:hover {
+            filter: grayscale(0.5) brightness(1.1);
+        }
+    `;
+    document.head.appendChild(glowStyle);
+    
+    console.log('Dashboard charts loaded successfully!');
+</script>
+{% endblock %}

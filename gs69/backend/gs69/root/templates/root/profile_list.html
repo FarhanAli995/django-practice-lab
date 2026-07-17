@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Profiles{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="h2"><i class="fas fa-users text-primary"></i> Manage Profiles</h1>
+            <p class="text-muted">View and manage all user profiles</p>
+        </div>
+        <div class="col-auto">
+            <a href="{% url 'profile_create' %}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Profile
+            </a>
+        </div>
+    </div>
+    
+    <!-- Search Bar -->
+    <div class="row mb-4">
+        <div class="col-md-6 animate__animated animate__fadeInLeft">
+            <form method="get" class="d-flex">
+                <input type="text" name="search" class="form-control me-2" 
+                       placeholder="Search by name, email, or profession..." 
+                       value="{{ search_query }}">
+                <button type="submit" class="btn btn-outline-primary">
+                    <i class="fas fa-search"></i> Search
+                </button>
+                {% if search_query %}
+                    <a href="{% url 'profile_list' %}" class="btn btn-outline-secondary ms-2">
+                        <i class="fas fa-times"></i> Clear
+                    </a>
+                {% endif %}
+            </form>
+        </div>
+        <div class="col-md-6 text-end animate__animated animate__fadeInRight">
+            <span class="text-muted">Total: <strong class="number-animate">{{ total_count }}</strong> profiles</span>
+        </div>
+    </div>
+    
+    <!-- Profiles Table -->
+    <div class="table-container hover-lift animate__animated animate__fadeInUp">
+        {% if profiles %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Profession</th>
+                        <th>Experience</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for profile in profiles %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="profile-avatar me-2">{{ profile.name|first|upper }}</div>
+                                <div>
+                                    <strong>{{ profile.name }}</strong>
+                                    <br>
+                                    <small class="text-muted">{{ profile.education }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ profile.email|default:"-" }}</td>
+                        <td>{{ profile.mobile_number }}</td>
+                        <td>{{ profile.profession|default:"-" }}</td>
+                        <td>{{ profile.experience_years }} years</td>
+                        <td>
+                            {% if profile.is_active %}
+                                <span class="badge bg-success badge-active">Active</span>
+                            {% else %}
+                                <span class="badge bg-danger badge-inactive">Inactive</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ profile.created_at|date:"Y-m-d" }}</td>
+                        <td>
+                            <a href="{% url 'profile_detail' profile.pk %}" 
+                               class="btn btn-sm btn-outline-info btn-action" title="View">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="{% url 'profile_update' profile.pk %}" 
+                               class="btn btn-sm btn-outline-primary btn-action" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="{% url 'profile_delete' profile.pk %}" 
+                               class="btn btn-sm btn-outline-danger btn-action" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fas fa-inbox" style="font-size: 48px; color: #ccc;"></i>
+            <h4 class="mt-3">No profiles found</h4>
+            <p class="text-muted">
+                {% if search_query %}
+                    No profiles match your search criteria.
+                {% else %}
+                    Start by creating your first profile.
+                {% endif %}
+            </p>
+            {% if not search_query %}
+                <a href="{% url 'profile_create' %}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Create Profile
+                </a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
