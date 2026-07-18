@@ -7,7 +7,7 @@
     <div class="row mb-4">
         <div class="col">
             <h1 class="h2">
-                <i class="fas fa-home text-primary"></i> User Profile Management
+                <i class="bi bi-house-fill text-primary"></i> User Profile Management
             </h1>
             <p class="text-muted">Create new profiles and manage existing ones</p>
         </div>
@@ -21,7 +21,7 @@
         <div class="col-lg-4 mb-4 animate__animated animate__fadeInLeft">
             <div class="table-container hover-lift">
                 <h5 class="mb-3">
-                    <i class="fas fa-plus-circle text-success"></i> Add New Profile
+                    <i class="bi bi-person-plus-fill text-success"></i> Add New Profile
                 </h5>
                 <hr>
                 
@@ -49,7 +49,7 @@
                                 {{ field }}
                                 <div class="invalid-feedback d-block">
                                     {% for error in field.errors %}
-                                        <i class="fas fa-exclamation-circle"></i> {{ error }}
+                                        <i class="bi bi-exclamation-circle-fill"></i> {{ error }}
                                     {% endfor %}
                                 </div>
                             </div>
@@ -59,14 +59,14 @@
                         
                         {% if field.help_text %}
                             <div class="form-text text-muted small">
-                                <i class="fas fa-info-circle"></i> {{ field.help_text }}
+                                <i class="bi bi-info-circle-fill"></i> {{ field.help_text }}
                             </div>
                         {% endif %}
                     </div>
                     {% endfor %}
                     
                     <button type="submit" class="btn btn-success w-100 pulse-btn">
-                        <i class="fas fa-save"></i> Save Profile
+                        <i class="bi bi-floppy-fill"></i> Save Profile
                     </button>
                 </form>
             </div>
@@ -77,13 +77,13 @@
             <div class="table-container hover-lift">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5>
-                        <i class="fas fa-list text-primary"></i> All Profiles
+                        <i class="bi bi-list-ul text-primary"></i> All Profiles
                     </h5>
                     <div class="input-group" style="max-width: 300px;">
                         <input type="text" id="searchInput" class="form-control form-control-sm" 
                                placeholder="Search profiles...">
                         <button class="btn btn-outline-primary btn-sm" onclick="searchProfiles()">
-                            <i class="fas fa-search"></i>
+                            <i class="bi bi-search"></i>
                         </button>
                     </div>
                 </div>
@@ -125,11 +125,11 @@
                                 <td>
                                     {% if profile.is_active %}
                                         <span class="badge bg-success badge-active">
-                                            <i class="fas fa-check-circle"></i> Active
+                                            <i class="bi bi-check-circle-fill"></i> Active
                                         </span>
                                     {% else %}
                                         <span class="badge bg-danger badge-inactive">
-                                            <i class="fas fa-times-circle"></i> Inactive
+                                            <i class="bi bi-x-circle-fill"></i> Inactive
                                         </span>
                                     {% endif %}
                                 </td>
@@ -138,17 +138,17 @@
                                         <!-- View Button -->
                                         <a href="{% url 'profile_detail' profile.pk %}" 
                                            class="btn btn-outline-info" title="View">
-                                            <i class="fas fa-eye"></i>
+                                            <i class="bi bi-eye-fill"></i>
                                         </a>
                                         <!-- Edit Button -->
                                         <a href="{% url 'profile_update' profile.pk %}" 
                                            class="btn btn-outline-primary" title="Edit">
-                                            <i class="fas fa-edit"></i>
+                                            <i class="bi bi-pencil-fill"></i>
                                         </a>
                                         <!-- Delete Button with confirmation -->
                                         <a href="#" class="btn btn-outline-danger" title="Delete"
                                            onclick="confirmDelete('{{ profile.pk }}', '{{ profile.name }}')">
-                                            <i class="fas fa-trash"></i>
+                                            <i class="bi bi-trash-fill"></i>
                                         </a>
                                     </div>
                                 </td>
@@ -159,11 +159,11 @@
                 </div>
                 
                 <div class="mt-3 text-muted small">
-                    <i class="fas fa-info-circle"></i> Showing {{ profiles.count }} profile(s)
+                    <i class="bi bi-info-circle-fill"></i> Showing {{ profiles.count }} profile(s)
                 </div>
                 {% else %}
                 <div class="text-center py-5">
-                    <i class="fas fa-inbox" style="font-size: 48px; color: #ccc;"></i>
+                    <i class="bi bi-inbox" style="font-size: 48px; color: #ccc;"></i>
                     <h4 class="mt-3">No profiles found</h4>
                     <p class="text-muted">Start by creating your first profile using the form.</p>
                 </div>
@@ -179,24 +179,24 @@
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
                 <h5 class="modal-title">
-                    <i class="fas fa-exclamation-triangle"></i> Confirm Delete
+                    <i class="bi bi-exclamation-triangle-fill"></i> Confirm Delete
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <p>Are you sure you want to delete <strong id="deleteName"></strong>?</p>
                 <p class="text-danger small">
-                    <i class="fas fa-info-circle"></i> This action cannot be undone!
+                    <i class="bi bi-info-circle-fill"></i> This action cannot be undone!
                 </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    <i class="fas fa-times"></i> Cancel
+                    <i class="bi bi-x-lg"></i> Cancel
                 </button>
                 <form id="deleteForm" method="post" style="display: inline;">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-trash"></i> Yes, Delete
+                        <i class="bi bi-trash-fill"></i> Yes, Delete
                     </button>
                 </form>
             </div>
