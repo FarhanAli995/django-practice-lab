@@ -29,6 +29,8 @@ class StudentFormView(View):
             # messages.add_message(request, messages.SUCCESS, 'Student registered successfully!')
             messages.success(request, 'Student registered successfully!')
             messages.info(request, 'now you can log in')
+            messages.debug(request, 'this is debug message')
+
         return render(request, self.template_name, {'form': form})
  
 

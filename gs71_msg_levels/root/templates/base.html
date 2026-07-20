@@ -10,7 +10,107 @@
         nav a { color: white; margin-right: 15px; text-decoration: none; }
         .container { max-width: 700px; margin: 30px auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
         form p { margin-bottom: 12px; }
+        
+        /* Style form errors in red */
+        .errorlist {
+            list-style: none;
+            padding: 0;
+            margin: 5px 0 0 0;
+            color: #dc3545;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .errorlist li {
+            background-color: #f8d7da;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border-left: 4px solid #dc3545;
+            margin-bottom: 5px;
+        }
+        
+        /* Highlight input fields with errors */
+        input.error,
+        textarea.error,
+        select.error {
+            border-color: #dc3545;
+            background-color: #fff8f8;
+        }
+        
         button { background: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; }
+        
+        /* Messages styling */
+        .messages {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .messages li {
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            border-left: 6px solid transparent;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .messages li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+        }
+        
+        .messages .alert-success {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+            color: #0b5e1e;
+        }
+        
+        .messages .alert-danger {
+            background-color: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+        
+        .messages .alert-warning {
+            background-color: #fff3cd;
+            border-left-color: #ffc107;
+            color: #856404;
+        }
+        
+        .messages .alert-info {
+            background-color: #d1ecf1;
+            border-left-color: #17a2b8;
+            color: #0c5460;
+        }
+        
+        .messages .alert-primary {
+            background-color: #cce5ff;
+            border-left-color: #007bff;
+            color: #004085;
+        }
+        
+        /* Additional message level styles */
+        .messages .alert-success::before {
+            content: "✅ ";
+        }
+        
+        .messages .alert-danger::before {
+            content: "❌ ";
+        }
+        
+        .messages .alert-warning::before {
+            content: "⚠️ ";
+        }
+        
+        .messages .alert-info::before {
+            content: "ℹ️ ";
+        }
+        
+        .messages .alert-primary::before {
+            content: "🔍 ";
+        }
     </style>
 </head>
 <body>
