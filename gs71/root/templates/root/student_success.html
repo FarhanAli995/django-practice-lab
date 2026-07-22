@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Success{% endblock %}
+
+{% block content %}
+<h2>Student Registered Successfully</h2>
+<p>Your student record has been submitted.</p>
+<a href="{% url 'root:student_form' %}">Register Another Student</a>
+{% endblock %}
