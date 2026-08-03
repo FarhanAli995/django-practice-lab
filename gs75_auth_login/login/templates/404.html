@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset Sent - Django Auth</title>
+    <title>Page Not Found - Django Auth</title>
     <style>
         * {
             margin: 0;
@@ -25,21 +25,28 @@
             background: white;
             border-radius: 10px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            padding: 40px;
+            padding: 50px;
             max-width: 500px;
             width: 100%;
             text-align: center;
         }
         
-        .success-icon {
-            font-size: 72px;
-            margin-bottom: 20px;
+        .error-icon {
+            font-size: 80px;
             display: block;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 72px;
+            color: #dc3545;
+            margin-bottom: 10px;
+            font-weight: 900;
         }
         
         h2 {
-            color: #28a745;
-            font-size: 28px;
+            color: #333;
+            font-size: 24px;
             margin-bottom: 15px;
         }
         
@@ -53,7 +60,7 @@
         .btn {
             display: inline-block;
             margin-top: 25px;
-            padding: 12px 40px;
+            padding: 14px 40px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             text-decoration: none;
@@ -67,7 +74,7 @@
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
         
-        .info-box {
+        .error-details {
             margin-top: 20px;
             padding: 15px;
             background: #f8f9fa;
@@ -76,44 +83,49 @@
             color: #666;
         }
         
-        .info-box strong {
+        .error-details strong {
             color: #333;
         }
         
         @media (max-width: 480px) {
             .container {
-                padding: 25px 20px;
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 56px;
             }
             
             h2 {
-                font-size: 24px;
+                font-size: 20px;
             }
             
-            .success-icon {
-                font-size: 56px;
+            .error-icon {
+                font-size: 60px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <span class="success-icon">📨</span>
-        <h2>Password Reset Email Sent!</h2>
+        <span class="error-icon">🔍</span>
+        <h1>404</h1>
+        <h2>Page Not Found</h2>
         <p>
-            Humne aapko email par instructions bhej diye hain.
+            Oops! The page you're looking for doesn't exist.
         </p>
         <p style="font-size: 14px; color: #888;">
-            Please check your email and click on the link provided to reset your password.
+            Ho sakta hai ke URL galat ho ya page move kar diya gaya ho.
         </p>
         
         <a href="{% url 'login' %}" class="btn">
-            Back to Login
+            🏠 Go to Login
         </a>
         
-        <div class="info-box">
-            <strong>💡 Note:</strong>
+        <div class="error-details">
+            <strong>💡 Tip:</strong>
             <br>
-            Agar email nahi aayi toh check karein ke spam folder mein nahi hai.
+            Check ke URL sahi hai ya nahi. Agar aapko lagta hai ke yeh error galat hai, toh admin se contact karein.
         </div>
     </div>
 </body>

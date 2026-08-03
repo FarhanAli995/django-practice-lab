@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Change Password - Django Auth</title>
+    <title>Sign Up - Django Auth</title>
     <style>
         * {
             margin: 0;
@@ -29,17 +29,25 @@
             width: 100%;
         }
         
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
         h2 {
             color: #333;
             font-size: 28px;
-            margin-bottom: 10px;
-            text-align: center;
+            margin-bottom: 5px;
         }
         
         .subtitle {
             color: #666;
-            text-align: center;
-            margin-bottom: 30px;
             font-size: 14px;
         }
         
@@ -88,7 +96,9 @@
             font-size: 14px;
         }
         
-        input[type="password"] {
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #e0e0e0;
@@ -97,7 +107,7 @@
             transition: border-color 0.3s;
         }
         
-        input[type="password"]:focus {
+        input:focus {
             outline: none;
             border-color: #667eea;
         }
@@ -120,10 +130,19 @@
             display: block;
         }
         
+        .helptext ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .helptext ul li {
+            margin-bottom: 3px;
+        }
+        
         button[type="submit"] {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
             color: white;
             border: none;
             border-radius: 5px;
@@ -135,33 +154,48 @@
         
         button[type="submit"]:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.3);
         }
         
         button[type="submit"]:active {
             transform: translateY(0);
         }
         
-        .back-link {
+        .login-link {
             text-align: center;
             margin-top: 20px;
+            color: #666;
+            font-size: 14px;
         }
         
-        .back-link a {
+        .login-link a {
             color: #667eea;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
         }
         
-        .back-link a:hover {
+        .login-link a:hover {
             text-decoration: underline;
         }
         
-        /* Password strength indicator (optional) */
-        .password-hint {
-            font-size: 12px;
-            color: #666;
+        .password-requirements {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 5px;
             margin-top: 5px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .password-requirements ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 5px;
+        }
+        
+        .password-requirements ul li::before {
+            content: "• ";
+            color: #667eea;
         }
         
         @media (max-width: 480px) {
@@ -177,8 +211,11 @@
 </head>
 <body>
     <div class="container">
-        <h2>🔐 Change Password</h2>
-        <p class="subtitle">Apni security ko strong banayein</p>
+        <div class="header">
+            <span class="logo">📝</span>
+            <h2>Create Account</h2>
+            <p class="subtitle">Sign up to get started with Django Auth</p>
+        </div>
         
         <!-- Display messages -->
         {% if messages %}
@@ -204,53 +241,56 @@
             {% csrf_token %}
             
             <div class="form-group">
-                <label for="id_old_password">Old Password</label>
-                {{ form.old_password }}
-                {% if form.old_password.errors %}
+                <label for="id_username">Username</label>
+                {{ form.username }}
+                {% if form.username.errors %}
                     <ul class="errorlist">
-                        {% for error in form.old_password.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
-            
-            <div class="form-group">
-                <label for="id_new_password1">New Password</label>
-                {{ form.new_password1 }}
-                {% if form.new_password1.errors %}
-                    <ul class="errorlist">
-                        {% for error in form.new_password1.errors %}
+                        {% for error in form.username.errors %}
                             <li>{{ error }}</li>
                         {% endfor %}
                     </ul>
                 {% endif %}
                 <span class="helptext">
-                    &#8226; Minimum 8 characters<br>
-                    &#8226; Alphanumeric characters allowed<br>
-                    &#8226; Common passwords ko avoid karein
+                    Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
                 </span>
             </div>
             
             <div class="form-group">
-                <label for="id_new_password2">Confirm New Password</label>
-                {{ form.new_password2 }}
-                {% if form.new_password2.errors %}
+                <label for="id_password1">Password</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
                     <ul class="errorlist">
-                        {% for error in form.new_password2.errors %}
+                        {% for error in form.password1.errors %}
                             <li>{{ error }}</li>
                         {% endfor %}
                     </ul>
                 {% endif %}
+                <div class="password-requirements">
+                    <strong>🔒 Password Requirements:</strong>
+                    {{ form.password1.help_text }}
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="id_password2">Confirm Password</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.password2.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <span class="helptext">Enter the same password as before, for verification.</span>
             </div>
             
             <button type="submit">
-                Change Password
+                Sign Up
             </button>
         </form>
         
-        <div class="back-link">
-            <a href="{% url 'login' %}">← Back to Login</a>
+        <div class="login-link">
+            Already have an account? <a href="{% url 'login' %}">Login here</a>
         </div>
     </div>
 </body>

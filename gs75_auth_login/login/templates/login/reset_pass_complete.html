@@ -3,11 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Reset Complete</title>
+    <title>Password Reset Complete - Django Auth</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .success-icon {
+            font-size: 72px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        h2 {
+            color: #28a745;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .security-note {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .security-note strong {
+            color: #333;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+            
+            h2 {
+                font-size: 24px;
+            }
+            
+            .success-icon {
+                font-size: 56px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Password Reset Complete</h2>
-<p>Aapka password badal chuka hai.</p>
-<a href="{% url 'login' %}">Login Now</a>
+    <div class="container">
+        <span class="success-icon">✅</span>
+        <h2>Password Reset Complete!</h2>
+        <p>
+            Aapka password kamyabi se badal chuka hai.
+        </p>
+        <p style="font-size: 14px; color: #888;">
+            Your password has been successfully changed.
+        </p>
+        
+        <a href="{% url 'login' %}" class="btn">
+            Login Now
+        </a>
+        
+        <div class="security-note">
+            <strong>🔒 Security Tip:</strong>
+            <br>
+            Agar aapne yeh change nahi kiya tha, toh immediately apna account secure karein.
+        </div>
+    </div>
 </body>
 </html>

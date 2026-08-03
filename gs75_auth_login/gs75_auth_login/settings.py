@@ -44,7 +44,7 @@ ROOT_URLCONF = 'gs75_auth_login.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'login' / 'templates'],  # Add templates directory for custom error pages
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,3 +105,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Authentication Settings
+# Redirect URLs after login/logout
+LOGIN_REDIRECT_URL = '/profile/'  # Where to go after successful login
+LOGIN_URL = '/login/'  # Where to redirect for login
+LOGOUT_REDIRECT_URL = '/login/'  # Where to go after logout

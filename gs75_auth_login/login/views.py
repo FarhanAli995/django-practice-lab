@@ -1,13 +1,36 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm, UserCreationForm
+from django.contrib.auth.views import PasswordChangeView
 from django.contrib import messages
-
-# Django ke built-in password reset views ko import karein
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.decorators import login_required
 
 # ==========================================
-# 1. LOGIN VIEW (Aapka custom code)
+# 1. LOGOUT VIEW
+# ==========================================
+def custom_logout_view(request):
+    """Custom logout view that logs out user and redirects to login"""
+    if request.method == 'POST':
+        logout(request)
+        messages.info(request, '✅ Aap successfully logout ho gaye hain!')
+        return redirect('login')
+    return redirect('profile')
+
+
+# ==========================================
+# 2. PROFILE VIEW
+# ==========================================
+@login_required
+def profile_view(request):
+    """User profile dashboard with links to change password"""
+    return render(request, 'login/profile.html')
+
+
+# ==========================================
+# 2. LOGIN VIEW (Aapka custom code)
 # ==========================================
 def custom_login_view(request):
     if request.method == 'POST':
@@ -24,34 +47,53 @@ def custom_login_view(request):
 
     return render(request, 'login/login.html')
 
-# registration form
-
-from django.contrib.auth.forms import UserCreationForm  
-# <--- Ise import karein
-
-# 1. Registration View (New)
+# Registration View
 def register_view(request):
-    # Agar user pehle se logged-in hai tou usay profile par bhej dein
+    """User registration view using Django's built-in UserCreationForm"""
     if request.user.is_authenticated:
         return redirect('profile')
 
     if request.method == 'POST':
-        fm = UserCreationForm(request.POST)
-        if fm.is_valid():
-            fm.save()  # Naya user database mein save ho jayega
-            messages.success(request, 'Aapka account kamyabi se ban gaya hai! Ab aap login kar sakte hain.')
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, '✅ Aapka account kamyabi se ban gaya hai! Ab aap login kar sakte hain.')
             return redirect('login')
+        else:
+            messages.error(request, '❌ Kuch galat ho gaya. Dobara koshish karein.')
     else:
-        fm = UserCreationForm()
+        form = UserCreationForm()
 
-    return render(request, 'login/register.html', {'form': fm})
+    return render(request, 'login/register.html', {'form': form})
 
 
 # ==========================================
-# 2. FORGOT PASSWORD VIEWS (Added)
+# PASSWORD CHANGE VIEW (With LoginRequiredMixin)
 # ==========================================
 
-# Step 1: User apna email dalega
-def user_change_pass(request):
-    fm = PasswordChangeForm(user = request.user)
-    return render(request, 'login/reset_pass.html', {'form': fm})
+class MyPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    """
+    Password change view that requires user to be logged in.
+    User must provide old password, new password, and confirmation.
+    """
+    form_class = PasswordChangeForm
+    template_name = 'login/password_change.html'
+    success_url = reverse_lazy('password_change_done')
+    
+    def form_valid(self, form):
+        """Called when valid form data has been POSTed."""
+        # Save the new password
+        form.save()
+        
+        # Important: Update session to prevent user from being logged out
+        update_session_auth_hash(self.request, form.user)
+        
+        # Success message
+        messages.success(self.request, 'Aapka password kamyabi se change ho gaya hai!')
+        
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        """Called when invalid form data has been POSTed."""
+        messages.error(self.request, '❌ Kuch galat ho gaya. Dobara koshish karein.')
+        return super().form_invalid(form)
